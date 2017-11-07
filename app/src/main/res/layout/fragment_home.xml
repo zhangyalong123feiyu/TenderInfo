@@ -494,10 +494,18 @@
                     android:textSize="15sp"
                     />
                 </LinearLayout>
-            <com.zyl_android.tenderinfo.project.builder.CustomerRecyclerview
-                android:id="@+id/homeRecyclerview"
+            <!--<com.zyl_android.tenderinfo.project.builder.CustomerRecyclerview-->
+                <!--android:id="@+id/homeRecyclerview"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"/>-->
+            <LinearLayout
+                android:id="@+id/recyclerViewContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/homerange_shape"
+                android:orientation="vertical"/>
         </LinearLayout>
     </com.zyl_android.tenderinfo.project.builder.ObservableScrollView>
     <include

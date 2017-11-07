@@ -3,19 +3,30 @@ package com.zyl_android.tenderinfo.project.ui.fragement;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zyl_android.generalutils.BannerUtils;
 import com.zyl_android.generalutils.coustomview.MyViewPager;
 import com.zyl_android.tenderinfo.R;
+import com.zyl_android.tenderinfo.mvp.presenter.FragementHomePresenter;
+import com.zyl_android.tenderinfo.mvp.view.FragmentHomeView;
+import com.zyl_android.tenderinfo.project.adapter.FragmentHomeAdapter;
+import com.zyl_android.tenderinfo.project.application.Constants;
+import com.zyl_android.tenderinfo.project.bean.BannerBean;
+import com.zyl_android.tenderinfo.project.bean.HomeFiveProjectBean;
 import com.zyl_android.tenderinfo.project.builder.CustomerRecyclerview;
 import com.zyl_android.tenderinfo.project.builder.ObservableScrollView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +36,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentHome extends BaseFragement {
+public class FragmentHome extends BaseFragement implements FragmentHomeView {
     @BindView(R.id.viewpager)
     MyViewPager viewpager;
     @BindView(R.id.group_contain)
@@ -86,32 +97,56 @@ public class FragmentHome extends BaseFragement {
     TextView buyInfoSubjectText;
     @BindView(R.id.newInfo_text)
     TextView newInfoText;
-    @BindView(R.id.homeRecyclerview)
-    CustomerRecyclerview homeRecyclerview;
-    @BindView(R.id.scrollview)
-    ObservableScrollView scrollview;
+    //    @BindView(R.id.homeRecyclerview)
+//    CustomerRecyclerview homeRecyclerview;
     @BindView(R.id.location)
     TextView location;
     @BindView(R.id.location_text)
     LinearLayout locationText;
     @BindView(R.id.search_layout)
     LinearLayout searchLayout;
+    @BindView(R.id.recyclerViewContainer)
+    LinearLayout recyclerViewContainer;
+    @BindView(R.id.scrollview)
+    ObservableScrollView scrollview;
     Unbinder unbinder;
+    private List<String> bannerUrl = new ArrayList<>();
+    private FragementHomePresenter fragementHomePresenter;
+    private CustomerRecyclerview customerRecyclerview;
+    private CustomerRecyclerview customerRecyclerview2;
 
     @Override
-    protected void onchildViewCreated(View view, Bundle savedInstanceState) {
-        FrameLayout mainLayout = (FrameLayout)view.findViewById(R.id.fra_base_main);
-        View fragememtHomeView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null);
-        mainLayout.addView(fragememtHomeView);
+    protected int getFragementHomeLayout() {
+        return R.layout.fragment_home;
     }
 
     @Override
     protected void initView() {
+        fragementHomePresenter = new FragementHomePresenter(this);
+        fragementHomePresenter.getBannerData();
+        BannerUtils bannerUtils = new BannerUtils(getActivity(), viewpager, groupContain, bannerUrl);
+        bannerUtils.startPlayBanner();
 
     }
 
     @Override
     protected void initData() {
+        fragementHomePresenter.getHomeProjectData("1", "14000");
+        fragementHomePresenter.getHomeTenderData("1", "14000");
+        customerRecyclerview = new CustomerRecyclerview(getActivity());
+        customerRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        customerRecyclerview2 = new CustomerRecyclerview(getActivity());
+        customerRecyclerview2.setLayoutManager(new LinearLayoutManager(getActivity()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
 
     }
 
@@ -162,4 +197,54 @@ public class FragmentHome extends BaseFragement {
                 break;
         }
     }
+
+    @Override
+    public void onGetBannerSucess(List<BannerBean.ItemBean> bannerList) {
+        for (int i = 0; i < bannerList.size(); i++) {
+            String url = bannerList.get(i).getImgUrl();
+            bannerUrl.add(Constants.baseUrl_pis + url);
+        }
+
+    }
+
+    @Override
+    public void onGetBannerFailed(String msg) {
+        Log.i("TAG", "bannermsgerr---------" + msg);
+    }
+
+    @Override
+    public void onGetHomeDataSucess(List<HomeFiveProjectBean.ItemsBean> homeProjectInfo) {
+        FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity());
+        customerRecyclerview.setAdapter(adapter);
+        recyclerViewContainer.addView(customerRecyclerview);
+    }
+
+    @Override
+    public void onGetHomeDataFailed(String msg) {
+        Log.i("TAG", "获取首页项目信息失败---------" + msg);
+    }
+
+    @Override
+    public void onGetHomeTenderSucess(List<HomeFiveProjectBean.ItemsBean> homeProjectInfo) {
+        FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity());
+        customerRecyclerview2.setAdapter(adapter);
+        Log.i("TAG", "获取首页招标信息成功---------" );
+        recyclerViewContainer.addView(customerRecyclerview2);
+    }
+
+    @Override
+    public void onGetHomeTenderFailed(String msg) {
+        Log.i("TAG", "获取首页招标信息失败---------" + msg);
+    }
+
+    @Override
+    public void onGetHomeBuySucess(List<HomeFiveProjectBean.ItemsBean> homeProjectInfo) {
+
+    }
+
+    @Override
+    public void onGetHomeBuyFailed(String msg) {
+
+    }
+
 }

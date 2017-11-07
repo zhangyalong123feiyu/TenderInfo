@@ -1,14 +1,14 @@
 package com.zyl_android.tenderinfo.mvp.model;
 
 import com.zyl_android.tenderinfo.project.api.BannerApi;
+import com.zyl_android.tenderinfo.project.api.FragmentHomeApi;
 import com.zyl_android.tenderinfo.project.application.Constants;
 import com.zyl_android.tenderinfo.project.bean.BannerBean;
+import com.zyl_android.tenderinfo.project.bean.HomeFiveProjectBean;
+import com.zyl_android.tenderinfo.project.utils.RetrofitUtil;
 
-import io.reactivex.Observable;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 
 /**
  * Created by bibinet on 2017-11-6.
@@ -16,11 +16,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragementHomeModel {
     public Observable<BannerBean> getBannerData(){
-        OkHttpClient okHttpClient=new OkHttpClient();
-        Retrofit retrofit=new Retrofit.Builder().client(okHttpClient).baseUrl(Constants.baseUrl_iip).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).
-                addConverterFactory(GsonConverterFactory.create()).build();
-        BannerApi bannerApi = retrofit.create(BannerApi.class);
+        BannerApi bannerApi = RetrofitUtil.getRetrofit(Constants.baseUrl_pis).create(BannerApi.class);
         Observable<BannerBean> bannerInfo = bannerApi.getBannerData();
         return bannerInfo;
+    }
+    public Observable<HomeFiveProjectBean> getFragementHomeData(String pageNum,String location){
+        Retrofit retrofit = RetrofitUtil.getRetrofit(Constants.baseUrl_pis);
+        FragmentHomeApi fragmentHomeApi = retrofit.create(FragmentHomeApi.class);
+        Observable<HomeFiveProjectBean> fiveProjectBeanObservable = fragmentHomeApi.getHomeProjectInfo(pageNum,location);
+        return fiveProjectBeanObservable;
+    }
+    public Observable<HomeFiveProjectBean> getFragementHomeTenderData(String pageNum,String location){
+        Retrofit retrofit = RetrofitUtil.getRetrofit(Constants.baseUrl_pis);
+        FragmentHomeApi fragmentHomeApi = retrofit.create(FragmentHomeApi.class);
+        Observable<HomeFiveProjectBean> fiveProjectBeanObservable = fragmentHomeApi.getHomeTenderInfo(pageNum,location);
+        return fiveProjectBeanObservable;
     }
 }

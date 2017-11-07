@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/homerange_shape"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="33dp">
+
+            <TextView
+                android:id="@+id/projcetName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="项目信息"
+                android:textColor="#f2835c"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/projectInfoMore"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:text="更多>>"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/projcetOneLayout"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/projectImageOne"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/companyNameOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/projectDescrpOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/projectLoactionOne"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:layout_width="73dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/projectIsTopOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:src="@mipmap/img_home_info_recommend"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/projectTimeOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#333333"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:background="#f0f0f0" />
+
+        <LinearLayout
+            android:id="@+id/projcetTwoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/projectTypeImageTwo"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/companyNameTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/projectDescrpTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/projectLoactionTwo"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:layout_width="73dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/projectIsTopTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:src="@mipmap/img_home_info_recommend"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/projectTimeTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#333333"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:background="#f0f0f0" />
+
+        <LinearLayout
+            android:id="@+id/projcetThreeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/projectTypeImageThree"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/companyNameThree"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/projectDescrpThree"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/projectLoactionThree"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:layout_width="73dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/projectIsTopThree"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:src="@mipmap/img_home_info_recommend"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/projectTimeThree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#333333"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:background="#f0f0f0" />
+
+        <LinearLayout
+            android:id="@+id/projcetFourLayout"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/projectTypeImageFour"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/companyNameFour"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/projectDescrpFour"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/projectLoactionFour"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:layout_width="73dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/projectIsTopFour"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:src="@mipmap/img_home_info_recommend"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/projectTimeFour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#333333"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:background="#f0f0f0" />
+
+        <LinearLayout
+            android:id="@+id/projcetFiveLayout"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/projectTypeImageFive"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/companyNameFive"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:textColor="#333333"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/projectDescrpFive"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/projectLoactionFive"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:layout_width="73dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/projectIsTopFive"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:src="@mipmap/img_home_info_recommend"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/projectTimeFive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#333333"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:background="#f0f0f0" />
+    </LinearLayout>
+</LinearLayout>

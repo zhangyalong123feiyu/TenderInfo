@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.zyl_android.tenderinfo.R;
@@ -21,19 +22,22 @@ public abstract class BaseFragement extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragement_base, container, false);
+        FrameLayout mainLayout = (FrameLayout)view.findViewById(R.id.fra_base_main);
+        View fragememtHomeView = LayoutInflater.from(getActivity()).inflate(getFragementHomeLayout(), null);
+        mainLayout.addView(fragememtHomeView);
         return view;
     }
+
+    protected abstract int getFragementHomeLayout();
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
-        onchildViewCreated(view,savedInstanceState);
         initView();
         initData();
     }
 
-    protected abstract void onchildViewCreated(View view, Bundle savedInstanceState);
 
     protected abstract void initView();
 
