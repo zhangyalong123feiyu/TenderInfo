@@ -16,19 +16,17 @@ import rx.Observable;
 
 public class FragementHomeModel {
     public Observable<BannerBean> getBannerData(){
-        BannerApi bannerApi = RetrofitUtil.getRetrofit(Constants.baseUrl_pis).create(BannerApi.class);
+        BannerApi bannerApi = RetrofitUtil.creatApi(BannerApi.class);
         Observable<BannerBean> bannerInfo = bannerApi.getBannerData();
         return bannerInfo;
     }
     public Observable<HomeFiveProjectBean> getFragementHomeData(String pageNum,String location){
-        Retrofit retrofit = RetrofitUtil.getRetrofit(Constants.baseUrl_pis);
-        FragmentHomeApi fragmentHomeApi = retrofit.create(FragmentHomeApi.class);
+        FragmentHomeApi fragmentHomeApi = RetrofitUtil.creatApi(FragmentHomeApi.class);
         Observable<HomeFiveProjectBean> fiveProjectBeanObservable = fragmentHomeApi.getHomeProjectInfo(pageNum,location);
         return fiveProjectBeanObservable;
     }
     public Observable<HomeFiveProjectBean> getFragementHomeTenderData(String pageNum,String location){
-        Retrofit retrofit = RetrofitUtil.getRetrofit(Constants.baseUrl_pis);
-        FragmentHomeApi fragmentHomeApi = retrofit.create(FragmentHomeApi.class);
+        FragmentHomeApi fragmentHomeApi = RetrofitUtil.creatApi(FragmentHomeApi.class);
         Observable<HomeFiveProjectBean> fiveProjectBeanObservable = fragmentHomeApi.getHomeTenderInfo(pageNum,location);
         return fiveProjectBeanObservable;
     }
