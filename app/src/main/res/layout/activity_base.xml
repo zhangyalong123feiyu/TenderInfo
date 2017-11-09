@@ -16,12 +16,20 @@
 
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     <ImageView
-        android:id="@+id/fra_net_error"
+        android:id="@+id/netErrorView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="145dp"
         android:visibility="gone"
+        android:src="@mipmap/img_net_error_show"
+        />
+    <com.zyl_android.generalutils.coustomview.WaitView
+        android:id="@+id/waitView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
         android:src="@mipmap/img_net_error_show"
         />
 </RelativeLayout>

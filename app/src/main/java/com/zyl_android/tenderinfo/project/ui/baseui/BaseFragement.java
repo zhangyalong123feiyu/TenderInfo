@@ -1,4 +1,4 @@
-package com.zyl_android.tenderinfo.project.ui.fragement;
+package com.zyl_android.tenderinfo.project.ui.baseui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.zyl_android.tenderinfo.R;
 
 import butterknife.ButterKnife;
@@ -18,14 +22,35 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseFragement extends Fragment {
+    public SmartRefreshLayout refreshLayout;
+
     @Nullable
-    @Override
+    @Override//初始化view，将view初始化好以后传递给onviewCreated方法
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragement_base, container, false);
         FrameLayout mainLayout = (FrameLayout)view.findViewById(R.id.fra_base_main);
+        refreshLayout=(SmartRefreshLayout)view.findViewById(R.id.refreshLayout);
         View fragememtHomeView = LayoutInflater.from(getActivity()).inflate(getFragementHomeLayout(), null);
         mainLayout.addView(fragememtHomeView);
+        initBaseView();
         return view;
+    }
+
+    private void initBaseView() {
+        refreshLayout.setEnabled(false);//设置下拉刷新状态
+        refreshLayout.setEnableAutoLoadmore(false);//设置自动上拉加载为不可用
+        refreshLayout.setEnableLoadmore(false);//设置上拉加载
+        refreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                toast("上拉加载");
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                toast("下拉刷新");
+            }
+        });
     }
 
     protected abstract int getFragementHomeLayout();

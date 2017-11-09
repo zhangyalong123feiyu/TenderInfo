@@ -1,13 +1,11 @@
 package com.zyl_android.tenderinfo.project.ui.fragement;
 
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,12 +22,13 @@ import com.zyl_android.tenderinfo.project.bean.BannerBean;
 import com.zyl_android.tenderinfo.project.bean.HomeFiveProjectBean;
 import com.zyl_android.tenderinfo.project.builder.CustomerRecyclerview;
 import com.zyl_android.tenderinfo.project.builder.ObservableScrollView;
+import com.zyl_android.tenderinfo.project.ui.activity.PlatformActivity;
+import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -126,6 +125,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
         fragementHomePresenter.getBannerData();
         BannerUtils bannerUtils = new BannerUtils(getActivity(), viewpager, groupContain, bannerUrl);
         bannerUtils.startPlayBanner();
+        refreshLayout.setEnabled(true);
 
     }
 
@@ -150,16 +150,25 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
 
     }
 
-    @OnClick({R.id.companyPlatform, R.id.finacePlatform, R.id.servicePlatform, R.id.platform_linearLayout, R.id.projcetInfo_layout, R.id.niProject_text, R.id.pProject_text, R.id.hostProject_text, R.id.projcetInfo_text, R.id.tenderProjcetInfo_layout, R.id.tenderPublic_text, R.id.changePublic_text, R.id.getPublci_text, R.id.publicPeople_text, R.id.tenderSubject_text, R.id.buyProjectInfo_layout, R.id.governmentBuy_text, R.id.companyBuy_text, R.id.buyInfoSubject_text, R.id.location_text, R.id.search_layout})
+    @OnClick({R.id.companyPlatform, R.id.finacePlatform, R.id.servicePlatform, R.id.bibiPlatform, R.id.projcetInfo_layout, R.id.niProject_text, R.id.pProject_text, R.id.hostProject_text, R.id.projcetInfo_text, R.id.tenderProjcetInfo_layout, R.id.tenderPublic_text, R.id.changePublic_text, R.id.getPublci_text, R.id.publicPeople_text, R.id.tenderSubject_text, R.id.buyProjectInfo_layout, R.id.governmentBuy_text, R.id.companyBuy_text, R.id.buyInfoSubject_text, R.id.location_text, R.id.search_layout})
     public void onViewClicked(View view) {
+        Intent intentPlatf = new Intent(getActivity(), PlatformActivity.class);
         switch (view.getId()) {
             case R.id.companyPlatform:
+                intentPlatf.putExtra("Type", "4");
+                getActivity().startActivity(intentPlatf);
                 break;
             case R.id.finacePlatform:
+                intentPlatf.putExtra("Type", "2");
+                getActivity().startActivity(intentPlatf);
                 break;
             case R.id.servicePlatform:
+                intentPlatf.putExtra("Type", "3");
+                getActivity().startActivity(intentPlatf);
                 break;
-            case R.id.platform_linearLayout:
+            case R.id.bibiPlatform:
+                intentPlatf.putExtra("Type", "1");
+                getActivity().startActivity(intentPlatf);
                 break;
             case R.id.projcetInfo_layout:
                 break;

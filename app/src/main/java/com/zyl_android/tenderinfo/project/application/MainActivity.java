@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.zyl_android.tenderinfo.R;
+import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentAsk;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentHome;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentMy;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
@@ -33,6 +33,16 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onrefresh() {
+
+    }
+
+    @Override
+    protected void onloadMore() {
+
     }
 
     @Override
