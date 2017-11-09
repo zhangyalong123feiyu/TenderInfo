@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    private SmartRefreshLayout smartRefreshLayout;
+    public SmartRefreshLayout smartRefreshLayout;
     public ImageView netErrorView;
     public WaitView waitView;
 
@@ -84,8 +85,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.finish();
         overridePendingTransition(R.anim.tr_void,R.anim.tr_exit);
     }
-    void toast(String str){
+    public void toast(String str){
         Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
+    }
+    public void log(String descrp,String str){
+        Log.i("TAG",descrp+"======================="+str);
     }
     public void initStateBarTransparent() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

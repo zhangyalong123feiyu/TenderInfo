@@ -23,6 +23,7 @@ import com.zyl_android.tenderinfo.project.bean.HomeFiveProjectBean;
 import com.zyl_android.tenderinfo.project.builder.CustomerRecyclerview;
 import com.zyl_android.tenderinfo.project.builder.ObservableScrollView;
 import com.zyl_android.tenderinfo.project.ui.activity.PlatformActivity;
+import com.zyl_android.tenderinfo.project.ui.activity.SearchActivity;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
 
 import java.util.ArrayList;
@@ -150,24 +151,24 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
 
     }
 
-    @OnClick({R.id.companyPlatform, R.id.finacePlatform, R.id.servicePlatform, R.id.bibiPlatform, R.id.projcetInfo_layout, R.id.niProject_text, R.id.pProject_text, R.id.hostProject_text, R.id.projcetInfo_text, R.id.tenderProjcetInfo_layout, R.id.tenderPublic_text, R.id.changePublic_text, R.id.getPublci_text, R.id.publicPeople_text, R.id.tenderSubject_text, R.id.buyProjectInfo_layout, R.id.governmentBuy_text, R.id.companyBuy_text, R.id.buyInfoSubject_text, R.id.location_text, R.id.search_layout})
+    @OnClick({R.id.bibiPlatform, R.id.companyPlatform, R.id.finacePlatform, R.id.servicePlatform, R.id.projcetInfo_layout, R.id.niProject_text, R.id.pProject_text, R.id.hostProject_text, R.id.projcetInfo_text, R.id.tenderProjcetInfo_layout, R.id.tenderPublic_text, R.id.changePublic_text, R.id.getPublci_text, R.id.publicPeople_text, R.id.tenderSubject_text, R.id.buyProjectInfo_layout, R.id.governmentBuy_text, R.id.companyBuy_text, R.id.buyInfoSubject_text, R.id.location_text, R.id.search_layout})
     public void onViewClicked(View view) {
         Intent intentPlatf = new Intent(getActivity(), PlatformActivity.class);
         switch (view.getId()) {
-            case R.id.companyPlatform:
-                intentPlatf.putExtra("Type", "4");
+            case R.id.bibiPlatform:
+                intentPlatf.putExtra("Type", "1");
                 getActivity().startActivity(intentPlatf);
                 break;
-            case R.id.finacePlatform:
+            case R.id.companyPlatform:
                 intentPlatf.putExtra("Type", "2");
                 getActivity().startActivity(intentPlatf);
                 break;
-            case R.id.servicePlatform:
+            case R.id.finacePlatform:
                 intentPlatf.putExtra("Type", "3");
                 getActivity().startActivity(intentPlatf);
                 break;
-            case R.id.bibiPlatform:
-                intentPlatf.putExtra("Type", "1");
+            case R.id.servicePlatform:
+                intentPlatf.putExtra("Type", "4");
                 getActivity().startActivity(intentPlatf);
                 break;
             case R.id.projcetInfo_layout:
@@ -203,6 +204,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
             case R.id.location_text:
                 break;
             case R.id.search_layout:
+                startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
         }
     }
