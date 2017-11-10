@@ -3,8 +3,6 @@ package com.zyl_android.tenderinfo.project.ui.activity;
 import android.content.Intent;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.project.application.Constants;
@@ -18,12 +16,7 @@ import butterknife.OnClick;
  */
 
 public class PlatformActivity extends BaseWebViewActivity {
-
-    @BindView(R.id.title)
-    TextView title;
-    @BindView(R.id.title_imageleft)
-    ImageView titleImageleft;
-    @BindView(R.id.platformWebview)
+    @BindView(R.id.Webview)
     WebView platformWebview;
 
     @Override
@@ -38,17 +31,22 @@ public class PlatformActivity extends BaseWebViewActivity {
 
     @Override
     protected int getChildlayout() {
-        return R.layout.activity_platform;
+        return R.layout.activity_h5;
+    }
+
+    @Override
+    protected void loadData(boolean isLoadMore) {
+
     }
 
     @Override
     protected int getWebview() {
-        return R.id.platformWebview;
+        return R.id.Webview;
     }
     @Override
     protected void initWebView() {
         title.setText("招标平台");
-        titleImageleft.setVisibility(View.VISIBLE);
+        titleBackImage.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         String type = intent.getStringExtra("Type");
         switch (Integer.parseInt(type)) {
@@ -72,11 +70,6 @@ public class PlatformActivity extends BaseWebViewActivity {
             default:
                 break;
         }
-    }
-
-    @Override
-    protected void loadData() {
-
     }
 
     @OnClick(R.id.title_imageleft)

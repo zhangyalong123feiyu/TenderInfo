@@ -29,7 +29,6 @@ public class SearchResultActivityPresenter {
                     public void onCompleted() {
 
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         searchResultActivityView.onGetSearchResultFailed(e.getMessage());

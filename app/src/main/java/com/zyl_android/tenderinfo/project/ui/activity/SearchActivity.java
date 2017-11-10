@@ -69,11 +69,12 @@ public class SearchActivity extends BaseActivity implements SearchActivityView{
 
     @Override
     protected void initView() {
+        titleLayout.setVisibility(View.GONE);
         searchActivityPresenter=new SearchActivityPresenter(this);
     }
 
     @Override
-    protected void loadData() {
+    protected void loadData(boolean isLoadMore) {
         searchActivityPresenter.getHotWords();
     }
     @OnClick({R.id.act_search_exit, R.id.doSearch, R.id.hotOne, R.id.hotTwo, R.id.hotThree, R.id.hotFour, R.id.hotFive, R.id.hotSix, R.id.act_search_delete_history})
@@ -83,10 +84,11 @@ public class SearchActivity extends BaseActivity implements SearchActivityView{
                 finish();
                 break;
             case R.id.doSearch:
-                String editContent = searchEdit.getText().toString();
+                String editContent = searchEdit.getText().toString().trim();
                 if (TextUtils.isEmpty(editContent)) {
                     toast("请确保您要收索的内容不为空");
-                		}
+                		}else {
+                }
                 hotWordsSearch(editContent);
                 break;
             case R.id.hotOne:
@@ -111,7 +113,6 @@ public class SearchActivity extends BaseActivity implements SearchActivityView{
                 break;
         }
     }
-
     @Override
     public void onGetHotWordsSucess(List<String> hotMsg) {
         TextView[] tvHot = new TextView[6];
@@ -140,6 +141,7 @@ public class SearchActivity extends BaseActivity implements SearchActivityView{
     private void hotWordsSearch(String content) {
         Intent intent = new Intent(this, SearchResultActivity.class);
         intent.putExtra("content", content);
+        log("TAG","传递内容+"+content);
         startActivity(intent);
         //写入数据
         SearchHistoryUtils.writeData(this, content);

@@ -40,6 +40,8 @@ public class TenderApplication extends Application {
             @Override
             public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
                 //指定为经典Footer，默认是 BallPulseFooter
+                layout.setFooterHeight(25);
+                layout.setPrimaryColors(R.color.gray);
                 return new ClassicsFooter(context).setSpinnerStyle(SpinnerStyle.Translate);
             }
         });

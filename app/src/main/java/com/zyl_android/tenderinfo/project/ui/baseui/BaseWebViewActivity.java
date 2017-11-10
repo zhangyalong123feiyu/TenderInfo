@@ -42,10 +42,7 @@ public abstract class BaseWebViewActivity extends BaseActivity {
     }
 
     protected abstract void initWebView();
-    @Override
-    protected void loadData() {
 
-    }
     //设置返回键动作（防止按返回键直接退出程序)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

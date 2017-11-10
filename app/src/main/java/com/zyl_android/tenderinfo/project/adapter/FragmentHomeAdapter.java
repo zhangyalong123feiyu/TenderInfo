@@ -1,6 +1,7 @@
 package com.zyl_android.tenderinfo.project.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.project.bean.HomeFiveProjectBean;
+import com.zyl_android.tenderinfo.project.ui.activity.ProjectDetailaActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,6 +128,12 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public FragHomeViewHolderTwo(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((Context)context).startActivity(new Intent(context, ProjectDetailaActivity.class));
+                }
+            });
         }
     }
 }

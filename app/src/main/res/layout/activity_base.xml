@@ -4,17 +4,26 @@
     android:layout_height="match_parent"
     android:background="#f4f4f4"
     >
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/fra_base_main"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/titleView"
+            layout="@layout/titlebar_item"/>
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_below="@id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <FrameLayout
+                android:id="@+id/fra_base_main"
+                android:layout_below="@id/titleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </RelativeLayout>
 
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
     <ImageView
         android:id="@+id/netErrorView"
         android:layout_width="wrap_content"

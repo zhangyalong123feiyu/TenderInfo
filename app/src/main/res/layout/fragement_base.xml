@@ -6,15 +6,21 @@
     >
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@+id/fra_base_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include
+                android:id="@+id/titleView"
+                layout="@layout/titlebar_item"/>
+            <FrameLayout
+                android:id="@+id/fra_base_main"
+                android:layout_below="@id/titleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     <ImageView
         android:id="@+id/fra_net_error"
         android:layout_width="wrap_content"

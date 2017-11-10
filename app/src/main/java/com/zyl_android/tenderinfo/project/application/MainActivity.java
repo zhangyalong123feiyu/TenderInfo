@@ -52,6 +52,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        titleLayout.setVisibility(View.GONE);
         framentHome = new FragmentHome();
         fragment_Ask = new FragmentAsk();
         fragment_My = new FragmentMy();
@@ -64,10 +65,9 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void loadData() {
+    protected void loadData(boolean isLoadMore) {
 
     }
-
 
     @OnClick({R.id.bottomhome, R.id.bottomask, R.id.bottomy})
     public void onViewClicked(View view) {

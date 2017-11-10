@@ -122,11 +122,12 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
 
     @Override
     protected void initView() {
+        titleLayout.setVisibility(View.GONE);
         fragementHomePresenter = new FragementHomePresenter(this);
         fragementHomePresenter.getBannerData();
         BannerUtils bannerUtils = new BannerUtils(getActivity(), viewpager, groupContain, bannerUrl);
         bannerUtils.startPlayBanner();
-        refreshLayout.setEnabled(true);
+        getSmartRefreshLayout().setEnabled(true);
 
     }
 
