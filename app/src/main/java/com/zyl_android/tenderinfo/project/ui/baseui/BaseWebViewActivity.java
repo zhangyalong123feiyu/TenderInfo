@@ -6,6 +6,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.zyl_android.generalutils.WaitUtils;
+import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
 import com.zyl_android.tenderinfo.project.builder.CustomerWebViewClient;
 
@@ -13,15 +14,17 @@ import com.zyl_android.tenderinfo.project.builder.CustomerWebViewClient;
  * Created by bibinet on 2017-11-9.
  */
 
-public abstract class BaseWebViewActivity extends BaseActivity {
+public  abstract class BaseWebViewActivity extends BaseActivity {
     private WebView webView;
+
     @Override
-    protected abstract int getChildlayout();
-    protected abstract int getWebview();
+    protected int getChildlayout() {
+        return R.layout.activity_h5;
+    }
 
     @Override
     protected void initView() {
-        webView = (WebView) findViewById(getWebview());
+        webView = (WebView) findViewById(R.id.Webview);
         initWebView();
         webView.setWebViewClient(new WebViewClient() {
             //覆写shouldOverrideUrlLoading实现内部显示网页
@@ -42,7 +45,9 @@ public abstract class BaseWebViewActivity extends BaseActivity {
     }
 
     protected abstract void initWebView();
-
+    protected WebView getWebView(){
+        return webView;
+    }
     //设置返回键动作（防止按返回键直接退出程序)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

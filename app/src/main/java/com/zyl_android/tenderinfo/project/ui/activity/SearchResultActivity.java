@@ -81,6 +81,7 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
     @Override
     public void onGetSearchResultSucess(List<SearchResultBean.ItemsBean> searchResultInfo) {
         getSmartRefreshLayout().finishLoadmore();//加载完成
+        getSmartRefreshLayout().finishRefresh();//刷新完成
         if (searchResultInfo.size()==0) {//判断是否完成加载
             getSmartRefreshLayout().finishLoadmore();
         }

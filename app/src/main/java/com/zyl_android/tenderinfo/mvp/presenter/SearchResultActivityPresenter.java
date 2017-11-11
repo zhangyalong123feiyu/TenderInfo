@@ -4,6 +4,8 @@ import com.zyl_android.tenderinfo.mvp.model.SearchResultAcitvityModel;
 import com.zyl_android.tenderinfo.mvp.view.SearchResultActivityView;
 import com.zyl_android.tenderinfo.project.bean.SearchResultBean;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import rx.Observer;
@@ -18,12 +20,19 @@ public class SearchResultActivityPresenter {
     private SearchResultAcitvityModel searchResultAcitvityModel;
     private SearchResultActivityView searchResultActivityView;
 
+
     public SearchResultActivityPresenter(SearchResultActivityView searchResultActivityView) {
         this.searchResultActivityView = searchResultActivityView;
         this.searchResultAcitvityModel=new SearchResultAcitvityModel();
     }
     public void getSearchResult(String pageNumb,String content){
-        searchResultAcitvityModel.searchHotWords(pageNumb,content).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+        String extendStr="";
+        try {
+             extendStr = URLEncoder.encode(content, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        searchResultAcitvityModel.searchHotWords(pageNumb,extendStr).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 new Observer<SearchResultBean>() {
                     @Override
                     public void onCompleted() {
