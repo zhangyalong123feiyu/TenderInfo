@@ -2,16 +2,21 @@ package com.zyl_android.tenderinfo.project.ui.fragement;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.common.io.Resources;
 import com.zyl_android.generalutils.BannerUtils;
+import com.zyl_android.generalutils.NetworkUtils;
 import com.zyl_android.generalutils.coustomview.MyViewPager;
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.mvp.presenter.FragementHomePresenter;
@@ -97,8 +102,6 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
     TextView buyInfoSubjectText;
     @BindView(R.id.newInfo_text)
     TextView newInfoText;
-    //    @BindView(R.id.homeRecyclerview)
-//    CustomerRecyclerview homeRecyclerview;
     @BindView(R.id.location)
     TextView location;
     @BindView(R.id.location_text)
@@ -109,11 +112,15 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
     LinearLayout recyclerViewContainer;
     @BindView(R.id.scrollview)
     ObservableScrollView scrollview;
-    Unbinder unbinder;
+    @BindView(R.id.netErrorView)
+    ImageView netErrorView;
     private List<String> bannerUrl = new ArrayList<>();
     private FragementHomePresenter fragementHomePresenter;
-    private CustomerRecyclerview customerRecyclerview;
-    private CustomerRecyclerview customerRecyclerview2;
+    private Drawable drawable;
+    private CustomerRecyclerview projectRecyclerview;
+    private CustomerRecyclerview tenderRecyclerview;
+    private CustomerRecyclerview buyRecyclerview;
+    private int projcetType;
 
     @Override
     protected int getFragementHomeLayout() {
@@ -123,6 +130,18 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
     @Override
     protected void initView() {
         titleLayout.setVisibility(View.GONE);
+        scrollview.setScrollViewListener(new ObservableScrollView.ScrollViewListener() {
+            @Override
+            public void onScrollChanged(int x, int y, int oldx, int oldy) {
+                searchLayout.setBackgroundColor(Color.parseColor("#f9c432"));
+                if (y >= 10) {
+                    searchLayout.getBackground().setAlpha(255);
+                } else if (y <= 10) {
+                    searchLayout.getBackground().setAlpha(0);
+                }
+            }
+        });
+        drawable= getResources().getDrawable(R.drawable.homerange_shape);//设置圆角
         fragementHomePresenter = new FragementHomePresenter(this);
         fragementHomePresenter.getBannerData();
         BannerUtils bannerUtils = new BannerUtils(getActivity(), viewpager, groupContain, bannerUrl);
@@ -133,22 +152,45 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
 
     @Override
     protected void initData() {
-        fragementHomePresenter.getHomeProjectData("1", "14000");
-        fragementHomePresenter.getHomeTenderData("1", "14000");
-        customerRecyclerview = new CustomerRecyclerview(getActivity());
-        customerRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()){
+        if (NetworkUtils.isNetworkAvailable(getActivity())) {
+            netErrorView.setVisibility(View.GONE);
+            fragementHomePresenter.getHomeProjectData("1", "14000");
+            fragementHomePresenter.getHomeTenderData("1", "14000");
+            fragementHomePresenter.getHomeBuyProjectInfo("1", "14000");
+        }else {
+            netErrorView.setVisibility(View.VISIBLE);
+        }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.topMargin=20;
+        //项目信息相关信息配置
+        projectRecyclerview = new CustomerRecyclerview(getActivity());
+        projectRecyclerview.setBackground(drawable);
+        projectRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()){
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         });
-        customerRecyclerview2 = new CustomerRecyclerview(getActivity());
-        customerRecyclerview2.setLayoutManager(new LinearLayoutManager(getActivity()){
+        //招标信息相关配置
+        tenderRecyclerview = new CustomerRecyclerview(getActivity());
+        tenderRecyclerview.setBackground(drawable);
+        tenderRecyclerview.setLayoutParams(params);
+        tenderRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()){
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         });
+        //采购信息相关配置
+        buyRecyclerview=new CustomerRecyclerview(getActivity());
+        buyRecyclerview.setBackground(drawable);
+        buyRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        buyRecyclerview.setLayoutParams(params);
 
     }
 
@@ -226,32 +268,34 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
 
     @Override
     public void onGetHomeDataSucess(List<HomeFiveProjectBean.ItemsBean> homeProjectInfo) {
-        FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity());
-        customerRecyclerview.setAdapter(adapter);
-        recyclerViewContainer.addView(customerRecyclerview);
+        projcetType=1;
+        FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity(),projcetType);
+        projectRecyclerview.setAdapter(adapter);
+        recyclerViewContainer.addView(projectRecyclerview);
     }
 
     @Override
     public void onGetHomeDataFailed(String msg) {
-        Log.i("TAG", "获取首页项目信息失败---------" + msg);
     }
 
     @Override
     public void onGetHomeTenderSucess(List<HomeFiveProjectBean.ItemsBean> homeProjectInfo) {
-        FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity());
-        customerRecyclerview2.setAdapter(adapter);
-        Log.i("TAG", "获取首页招标信息成功---------" );
-        recyclerViewContainer.addView(customerRecyclerview2);
+        projcetType=2;
+        FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity(),projcetType);
+        tenderRecyclerview.setAdapter(adapter);
+        recyclerViewContainer.addView(tenderRecyclerview);
     }
 
     @Override
     public void onGetHomeTenderFailed(String msg) {
-        Log.i("TAG", "获取首页招标信息失败---------" + msg);
     }
 
     @Override
     public void onGetHomeBuySucess(List<HomeFiveProjectBean.ItemsBean> homeProjectInfo) {
-
+        projcetType=3;
+        FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity(),projcetType);
+        buyRecyclerview.setAdapter(adapter);
+        recyclerViewContainer.addView(buyRecyclerview);
     }
 
     @Override

@@ -31,10 +31,11 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static int TYPE_TWO = 1;
     private List<HomeFiveProjectBean.ItemsBean> homeProjectInfoList = new ArrayList<>();
     private Context context;
-
-    public FragmentHomeAdapter(List<HomeFiveProjectBean.ItemsBean> homeProjectInfoList, Context context) {
+    private int projectType;
+    public FragmentHomeAdapter(List<HomeFiveProjectBean.ItemsBean> homeProjectInfoList, Context context,int projectType) {
         this.homeProjectInfoList = homeProjectInfoList;
         this.context = context;
+        this.projectType=projectType;
     }
 
     @Override
@@ -63,7 +64,13 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof FragHomeViewHolderOne) {
-        ((FragHomeViewHolderOne) holder).projcetName.setText("项目信息");
+            if (projectType==1) {
+                ((FragHomeViewHolderOne) holder).projcetName.setText("项目信息");
+            		}else if (projectType==2) {
+                ((FragHomeViewHolderOne) holder).projcetName.setText("招标信息");
+            				}else {
+                ((FragHomeViewHolderOne) holder).projcetName.setText("采购信息");
+            }
         }else if (holder instanceof FragHomeViewHolderTwo) {
             ((FragHomeViewHolderTwo) holder).companyName.setText(homeProjectInfoList.get(position-1).getProjectName());
             ((FragHomeViewHolderTwo) holder).projectDescrp.setText(homeProjectInfoList.get(position-1).getProjectDescrp());

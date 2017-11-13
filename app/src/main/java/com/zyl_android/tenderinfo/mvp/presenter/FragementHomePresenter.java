@@ -79,12 +79,32 @@ public class FragementHomePresenter extends BasePresenter {
 
             @Override
             public void onError(Throwable e) {
-            fragmentHomeView.onGetHomeDataFailed(e.getMessage());
+            fragmentHomeView.onGetHomeTenderFailed(e.getMessage());
             }
 
             @Override
             public void onNext(HomeFiveProjectBean homeFiveProjectBean) {
-            fragmentHomeView.onGetHomeDataSucess(homeFiveProjectBean.getItems());
+            fragmentHomeView.onGetHomeTenderSucess(homeFiveProjectBean.getItems());
+            }
+        });
+        addSubScription(subscription);
+    }
+    public void getHomeBuyProjectInfo(String pageNum,String location){
+        Subscription subscription=fragementHomeModel.getFragementHomeBuyData(pageNum,location).subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<HomeFiveProjectBean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                fragmentHomeView.onGetHomeBuyFailed(e.getMessage());
+            }
+
+            @Override
+            public void onNext(HomeFiveProjectBean homeFiveProjectBean) {
+                fragmentHomeView.onGetHomeBuySucess(homeFiveProjectBean.getItems());
             }
         });
         addSubScription(subscription);

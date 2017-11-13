@@ -3,12 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    >
-  <!--  <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">-->
     <com.zyl_android.tenderinfo.project.builder.ObservableScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
@@ -500,23 +494,25 @@
                     android:textSize="15sp"
                     />
                 </LinearLayout>
-            <!--<com.zyl_android.tenderinfo.project.builder.CustomerRecyclerview-->
-                <!--android:id="@+id/homeRecyclerview"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"/>-->
             <LinearLayout
                 android:id="@+id/recyclerViewContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:background="@drawable/homerange_shape"
-                android:orientation="vertical"/>
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/netErrorView"
+                    android:layout_width="80dp"
+                    android:layout_height="75dp"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@mipmap/img_net_error_show"/>
+        </LinearLayout>
         </LinearLayout>
     </com.zyl_android.tenderinfo.project.builder.ObservableScrollView>
     <include
         layout="@layout/item_home_search"
         />
-<!--</RelativeLayout>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
+
 </RelativeLayout>

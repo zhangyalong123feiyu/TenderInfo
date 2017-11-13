@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:gravity="center_vertical"
-            android:textColor="#999999"
+            android:hint="请输入您想要查询的信息"
             android:textSize="12.5sp" />
 
         <ImageView

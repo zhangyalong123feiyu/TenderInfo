@@ -1,21 +1,28 @@
 package com.zyl_android.tenderinfo.project.ui.baseui;
 
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import com.zyl_android.generalutils.WaitUtils;
 import com.zyl_android.tenderinfo.R;
-import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
 import com.zyl_android.tenderinfo.project.builder.CustomerWebViewClient;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by bibinet on 2017-11-9.
  */
 
-public  abstract class BaseWebViewActivity extends BaseActivity {
-    private WebView webView;
+public abstract class BaseWebViewActivity extends BaseActivity {
+    @BindView(R.id.Webview)
+    WebView webView;
+    @BindView(R.id.netErrorView)
+    ImageView netErrorView;
 
     @Override
     protected int getChildlayout() {
@@ -45,9 +52,11 @@ public  abstract class BaseWebViewActivity extends BaseActivity {
     }
 
     protected abstract void initWebView();
-    protected WebView getWebView(){
+
+    protected WebView getWebView() {
         return webView;
     }
+
     //设置返回键动作（防止按返回键直接退出程序)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -61,5 +70,12 @@ public  abstract class BaseWebViewActivity extends BaseActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

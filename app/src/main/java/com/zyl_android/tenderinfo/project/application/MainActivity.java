@@ -1,9 +1,12 @@
 package com.zyl_android.tenderinfo.project.application;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.zyl_android.tenderinfo.R;
@@ -13,9 +16,10 @@ import com.zyl_android.tenderinfo.project.ui.fragement.FragmentHome;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentMy;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.bottomhome)
     RelativeLayout bottomhome;
@@ -33,26 +37,17 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        initStateBarTransparent();
+        initView();
     }
-
-    @Override
-    protected void onrefresh() {
-
+    public void initStateBarTransparent() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
-
-    @Override
-    protected void onloadMore() {
-
-    }
-
-    @Override
-    protected int getChildlayout() {
-        return R.layout.activity_main;
-    }
-
-    @Override
     protected void initView() {
-        titleLayout.setVisibility(View.GONE);
         framentHome = new FragmentHome();
         fragment_Ask = new FragmentAsk();
         fragment_My = new FragmentMy();
@@ -62,11 +57,6 @@ public class MainActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.fragementcontainer, framentHome).show(framentHome).
                 add(R.id.fragementcontainer, fragment_Ask).hide(fragment_Ask).add(R.id.fragementcontainer, fragment_My).hide(fragment_My)
                 .commit();
-    }
-
-    @Override
-    protected void loadData(boolean isLoadMore) {
-
     }
 
     @OnClick({R.id.bottomhome, R.id.bottomask, R.id.bottomy})

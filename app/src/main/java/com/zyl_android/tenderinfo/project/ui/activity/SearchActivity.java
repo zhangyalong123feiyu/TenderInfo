@@ -88,8 +88,8 @@ public class SearchActivity extends BaseActivity implements SearchActivityView{
                 if (TextUtils.isEmpty(editContent)) {
                     toast("请确保您要收索的内容不为空");
                 		}else {
+                    hotWordsSearch(editContent);
                 }
-                hotWordsSearch(editContent);
                 break;
             case R.id.hotOne:
                 hotWordsSearch(hotOne.getText().toString());

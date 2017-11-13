@@ -21,13 +21,4 @@
                 android:layout_height="match_parent"/>
         </RelativeLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-    <ImageView
-        android:id="@+id/fra_net_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="145dp"
-        android:visibility="gone"
-        android:src="@mipmap/img_net_error_show"
-        />
 </RelativeLayout>

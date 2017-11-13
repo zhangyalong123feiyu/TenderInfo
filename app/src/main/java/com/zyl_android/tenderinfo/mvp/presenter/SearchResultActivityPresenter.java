@@ -26,13 +26,7 @@ public class SearchResultActivityPresenter {
         this.searchResultAcitvityModel=new SearchResultAcitvityModel();
     }
     public void getSearchResult(String pageNumb,String content){
-        String extendStr="";
-        try {
-             extendStr = URLEncoder.encode(content, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        searchResultAcitvityModel.searchHotWords(pageNumb,extendStr).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+        searchResultAcitvityModel.searchHotWords(pageNumb,content).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 new Observer<SearchResultBean>() {
                     @Override
                     public void onCompleted() {

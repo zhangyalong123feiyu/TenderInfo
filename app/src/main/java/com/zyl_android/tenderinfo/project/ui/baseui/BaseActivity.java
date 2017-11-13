@@ -30,7 +30,6 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private SmartRefreshLayout smartRefreshLayout;
-    public ImageView netErrorView;
     public WaitView waitView;
     public RelativeLayout titleLayout;
     public TextView title;
@@ -54,7 +53,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         title=(TextView)findViewById(R.id.title);
         titleBackImage=(ImageView)findViewById(R.id.title_imageleft);
         titleImageRight=(ImageView)findViewById(R.id.title_imageright);
-        netErrorView = (ImageView) findViewById(R.id.netErrorView);
         waitView = (WaitView) findViewById(R.id.waitView);
         View childLayoutView = LayoutInflater.from(this).inflate(getChildlayout(), null);
         smartRefreshLayout = (SmartRefreshLayout) findViewById(R.id.refreshLayout);

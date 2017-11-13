@@ -33,7 +33,6 @@ public abstract class BaseFragement extends Fragment {
         View view = inflater.inflate(R.layout.fragement_base, container, false);
         FrameLayout mainLayout = (FrameLayout) view.findViewById(R.id.fra_base_main);
         titleLayout = (RelativeLayout) view.findViewById(R.id.titleView);
-
         smartRefreshLayout = (SmartRefreshLayout) view.findViewById(R.id.refreshLayout);
         View fragememtHomeView = LayoutInflater.from(getActivity()).inflate(getFragementHomeLayout(), null);
         mainLayout.addView(fragememtHomeView);
@@ -48,12 +47,10 @@ public abstract class BaseFragement extends Fragment {
         smartRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                toast("上拉加载");
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                toast("下拉刷新");
             }
         });
     }

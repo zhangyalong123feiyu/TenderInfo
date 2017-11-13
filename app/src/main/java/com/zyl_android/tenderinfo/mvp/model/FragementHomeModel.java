@@ -30,4 +30,9 @@ public class FragementHomeModel {
         Observable<HomeFiveProjectBean> fiveProjectBeanObservable = fragmentHomeApi.getHomeTenderInfo(pageNum,location);
         return fiveProjectBeanObservable;
     }
+    public Observable<HomeFiveProjectBean> getFragementHomeBuyData(String pageNum,String location){
+        FragmentHomeApi fragmentHomeApi = RetrofitUtil.creatApi(FragmentHomeApi.class);
+        Observable<HomeFiveProjectBean> fiveProjectBeanObservable = fragmentHomeApi.getHomeTenderInfo(pageNum,location);
+        return fiveProjectBeanObservable;
+    }
 }
