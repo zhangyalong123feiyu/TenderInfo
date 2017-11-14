@@ -56,6 +56,8 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
     protected void initView() {
         title.setText("搜索结果");
         titleBackImage.setVisibility(View.VISIBLE);
+        waitView.setVisibility(View.VISIBLE);
+        waitView.start();
         content = getIntent().getStringExtra("content");
         getSmartRefreshLayout().setEnableLoadmore(true);
         getSmartRefreshLayout().setEnableRefresh(true);
@@ -81,6 +83,8 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
 
     @Override
     public void onGetSearchResultSucess(List<SearchResultBean.ItemsBean> searchResultInfo) {
+        waitView.stop();
+        waitView.setVisibility(View.GONE);
         if (isloadmore) {
             if (searchResultInfo.size()==0) {//判断是否完成加载
                 getSmartRefreshLayout().finishLoadmore();

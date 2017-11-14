@@ -66,13 +66,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         smartRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                toast("上拉加载");
                 onloadMore();
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                toast("下拉刷新");
                 onrefresh();
             }
         });

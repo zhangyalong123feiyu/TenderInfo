@@ -8,23 +8,36 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zyl_android.tenderinfo.R;
+import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentMy extends Fragment {
-
-
-    public FragmentMy() {
-        // Required empty public constructor
-    }
+public class FragmentMy extends BaseFragement {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my, container, false);
+    protected void refreshData() {
+
     }
 
+    @Override
+    protected void loadMoreData() {
+
+    }
+
+    @Override
+    protected int getFragementHomeLayout() {
+        return R.layout.fragment_my;
+    }
+
+    @Override
+    protected void initView() {
+      titleLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
 }

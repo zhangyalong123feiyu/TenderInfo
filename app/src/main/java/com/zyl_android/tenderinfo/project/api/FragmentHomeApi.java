@@ -15,4 +15,6 @@ public interface FragmentHomeApi {
     Observable<HomeFiveProjectBean> getHomeProjectInfo(@Query("pageNum") String pagenumb,@Query("provinceId") String provinceId);
     @POST("appData/selectPageBiddingInfoIndex.json")//首页招标信息
     Observable<HomeFiveProjectBean> getHomeTenderInfo(@Query("pageNum") String pagenumb,@Query("provinceId") String provinceId);
+    @POST("appData/selectPagePurchaseIndex.json")//首页采购信息
+    Observable<HomeFiveProjectBean> getHomeBuyInfo(@Query("pageNum") String pagenumb,@Query("provinceId") String provinceId);
 }

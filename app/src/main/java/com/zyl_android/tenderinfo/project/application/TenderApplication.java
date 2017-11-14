@@ -2,7 +2,9 @@ package com.zyl_android.tenderinfo.project.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 
+import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;
@@ -31,7 +33,8 @@ public class TenderApplication extends Application {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
                 layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.black);//全局设置主题颜色
-                return new ClassicsHeader(context).setSpinnerStyle(SpinnerStyle.Translate);//指定为经典Header，默认是 贝塞尔雷达Header
+                layout.setEnableHeaderTranslationContent(false);
+                return new MaterialHeader(context).setColorSchemeColors(Color.argb(255,200,100,100),Color.argb(255,50,100,200),Color.argb(255,150,30,100));//指定为经典Header，默认是 贝塞尔雷达Header
             }
 
         });

@@ -1,13 +1,354 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zyl_android.tenderinfo.project.ui.fragement.FragmentMy">
+    android:orientation="vertical"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:id="@+id/fra_my_top_move"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f9c432"
+            android:orientation="vertical">
+            <View
+                android:id="@+id/fake_status_bar"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="我的"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+            </View>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/fra_my_bottom_move"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="85dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/img_my_top" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#f9f9f6"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/companyInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="32dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="50dp"
+                            android:src="@mipmap/wode_zl" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="15dp"
+                            android:text="企业资料"
+                            android:textColor="#333333" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="13dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="12dp"
+                            android:src="@mipmap/wode_qianjin"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/privateOdering"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="50dp"
+                            android:src="@mipmap/wode_sr" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="15dp"
+                            android:text="@string/privateOdering"
+                            android:textColor="#333333" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="13dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="12dp"
+                            android:src="@mipmap/wode_qianjin"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/foucsMy"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="50dp"
+                            android:src="@mipmap/wode_gzi" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="15dp"
+                            android:text="我的关注"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="13dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="12dp"
+                            android:src="@mipmap/wode_qianjin"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/aboutOur"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="50dp"
+                            android:src="@mipmap/wode_gy" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="15dp"
+                            android:text="关于我们"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="13dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="12dp"
+                            android:src="@mipmap/wode_qianjin"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/serviceTerm"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="50dp"
+                            android:src="@mipmap/wode_fw1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="15dp"
+                            android:text="服务条款"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="13dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="12dp"
+                            android:src="@mipmap/wode_qianjin"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/legalStatement"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="50dp"
+                            android:src="@mipmap/wode_fl" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="15dp"
+                            android:text="法律声明"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="13dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="12dp"
+                            android:src="@mipmap/wode_qianjin"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="50dp"
+                            android:src="@mipmap/wode_sz" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="15dp"
+                            android:text="设置"
+                            android:textColor="#333333"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="7dp"
+                            android:layout_height="13dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="12dp"
+                            android:src="@mipmap/wode_qianjin"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/fra_my_login_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/shape_my_icon_background"
+                android:padding="2dp"
+                android:src="@mipmap/wode_toux" />
+
+            <Button
+                android:id="@+id/fra_my_login_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/fra_my_login_icon"
+                android:background="@null"
+                android:text="请点击登录"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

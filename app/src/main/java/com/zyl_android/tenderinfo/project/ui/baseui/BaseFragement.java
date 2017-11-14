@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -26,6 +28,8 @@ import butterknife.Unbinder;
 public abstract class BaseFragement extends Fragment {
     private SmartRefreshLayout smartRefreshLayout;
     public RelativeLayout titleLayout;
+    public TextView title_textView;
+    public ImageView title_backImage;
 
     @Nullable
     @Override//初始化view，将view初始化好以后传递给onviewCreated方法
@@ -33,33 +37,13 @@ public abstract class BaseFragement extends Fragment {
         View view = inflater.inflate(R.layout.fragement_base, container, false);
         FrameLayout mainLayout = (FrameLayout) view.findViewById(R.id.fra_base_main);
         titleLayout = (RelativeLayout) view.findViewById(R.id.titleView);
+        title_textView=(TextView)view.findViewById(R.id.title);
+        title_backImage=(ImageView)view.findViewById(R.id.title_imageleft);
         smartRefreshLayout = (SmartRefreshLayout) view.findViewById(R.id.refreshLayout);
         View fragememtHomeView = LayoutInflater.from(getActivity()).inflate(getFragementHomeLayout(), null);
         mainLayout.addView(fragememtHomeView);
         initBaseView();
         return view;
-    }
-
-    private void initBaseView() {
-        smartRefreshLayout.setEnabled(false);//设置下拉刷新状态
-        smartRefreshLayout.setEnableAutoLoadmore(false);//设置自动上拉加载为不可用
-        smartRefreshLayout.setEnableLoadmore(false);//设置上拉加载
-        smartRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-            }
-
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-            }
-        });
-    }
-
-    protected abstract int getFragementHomeLayout();
-
-    protected SmartRefreshLayout getSmartRefreshLayout() {
-        return smartRefreshLayout;
-
     }
 
     @Override
@@ -70,6 +54,33 @@ public abstract class BaseFragement extends Fragment {
         initData();
     }
 
+    private void initBaseView() {
+        smartRefreshLayout.setEnabled(false);//设置下拉刷新状态
+        smartRefreshLayout.setEnableAutoLoadmore(false);//设置自动上拉加载为不可用
+        smartRefreshLayout.setEnableLoadmore(false);//设置上拉加载
+        smartRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                loadMoreData();
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshData();
+            }
+        });
+    }
+
+    protected abstract void refreshData();
+
+    protected abstract void loadMoreData();
+
+    protected abstract int getFragementHomeLayout();
+
+    protected SmartRefreshLayout getSmartRefreshLayout() {
+        return smartRefreshLayout;
+
+    }
 
     protected abstract void initView();
 

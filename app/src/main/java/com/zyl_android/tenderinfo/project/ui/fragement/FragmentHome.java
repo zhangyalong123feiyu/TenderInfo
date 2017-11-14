@@ -121,6 +121,18 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
     private CustomerRecyclerview tenderRecyclerview;
     private CustomerRecyclerview buyRecyclerview;
     private int projcetType;
+    private boolean isRefresh;
+
+    @Override
+    protected void refreshData() {
+        isRefresh=true;
+        initData();
+    }
+
+    @Override
+    protected void loadMoreData() {
+
+    }
 
     @Override
     protected int getFragementHomeLayout() {
@@ -152,11 +164,13 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
 
     @Override
     protected void initData() {
+        if (isRefresh) {
+        			recyclerViewContainer.removeAllViews();
+            isRefresh=false;
+        		}
         if (NetworkUtils.isNetworkAvailable(getActivity())) {
             netErrorView.setVisibility(View.GONE);
             fragementHomePresenter.getHomeProjectData("1", "14000");
-            fragementHomePresenter.getHomeTenderData("1", "14000");
-            fragementHomePresenter.getHomeBuyProjectInfo("1", "14000");
         }else {
             netErrorView.setVisibility(View.VISIBLE);
         }
@@ -184,6 +198,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
         //采购信息相关配置
         buyRecyclerview=new CustomerRecyclerview(getActivity());
         buyRecyclerview.setBackground(drawable);
+        buyRecyclerview.setLayoutParams(params);
         buyRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()){
             @Override
             public boolean canScrollVertically() {
@@ -269,9 +284,11 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
     @Override
     public void onGetHomeDataSucess(List<HomeFiveProjectBean.ItemsBean> homeProjectInfo) {
         projcetType=1;
+        getSmartRefreshLayout().finishRefresh();//完成刷新
         FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity(),projcetType);
         projectRecyclerview.setAdapter(adapter);
         recyclerViewContainer.addView(projectRecyclerview);
+        fragementHomePresenter.getHomeTenderData("1", "14000");
     }
 
     @Override
@@ -284,6 +301,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
         FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity(),projcetType);
         tenderRecyclerview.setAdapter(adapter);
         recyclerViewContainer.addView(tenderRecyclerview);
+        fragementHomePresenter.getHomeBuyProjectInfo("1", "14000");
     }
 
     @Override
@@ -296,6 +314,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
         FragmentHomeAdapter adapter = new FragmentHomeAdapter(homeProjectInfo, getActivity(),projcetType);
         buyRecyclerview.setAdapter(adapter);
         recyclerViewContainer.addView(buyRecyclerview);
+
     }
 
     @Override

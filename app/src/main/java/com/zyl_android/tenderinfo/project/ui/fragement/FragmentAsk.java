@@ -8,23 +8,37 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zyl_android.tenderinfo.R;
+import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentAsk extends Fragment {
-
-
-    public FragmentAsk() {
-        // Required empty public constructor
-    }
-
+public class FragmentAsk extends BaseFragement {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ask, container, false);
+    protected void refreshData() {
+
+    }
+
+    @Override
+    protected void loadMoreData() {
+
+    }
+
+    @Override
+    protected int getFragementHomeLayout() {
+        return R.layout.fragment_ask;
+    }
+
+    @Override
+    protected void initView() {
+        title_textView.setText("比比驿站");
+        title_backImage.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
 }
