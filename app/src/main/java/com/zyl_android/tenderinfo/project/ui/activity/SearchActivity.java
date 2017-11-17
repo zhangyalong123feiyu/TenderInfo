@@ -1,12 +1,19 @@
 package com.zyl_android.tenderinfo.project.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.mvp.presenter.SearchActivityPresenter;
@@ -87,6 +94,15 @@ public class SearchActivity extends BaseActivity implements SearchActivityView{
                 String editContent = searchEdit.getText().toString().trim();
                 if (TextUtils.isEmpty(editContent)) {
                     toast("请确保您要收索的内容不为空");
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                                    10001);//自定义的code
+                        }
+                    }
+
                 		}else {
                     hotWordsSearch(editContent);
                 }
@@ -111,6 +127,13 @@ public class SearchActivity extends BaseActivity implements SearchActivityView{
                 break;
             case R.id.act_search_delete_history:
                 break;
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==200) {
+            Toast.makeText(SearchActivity.this,"woyaokaishi",Toast.LENGTH_SHORT).show();
         }
     }
     @Override

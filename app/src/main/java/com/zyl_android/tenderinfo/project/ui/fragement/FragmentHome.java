@@ -1,20 +1,26 @@
 package com.zyl_android.tenderinfo.project.ui.fragement;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.common.io.Resources;
 import com.zyl_android.generalutils.BannerUtils;
 import com.zyl_android.generalutils.NetworkUtils;
 import com.zyl_android.generalutils.coustomview.MyViewPager;
@@ -42,6 +48,7 @@ import butterknife.Unbinder;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentHome extends BaseFragement implements FragmentHomeView {
+    private static final int REQUECT_CODE_LOCATION = 1;
     @BindView(R.id.viewpager)
     MyViewPager viewpager;
     @BindView(R.id.group_contain)
@@ -260,11 +267,31 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
             case R.id.buyInfoSubject_text:
                 break;
             case R.id.location_text:
+                startLocation();
                 break;
             case R.id.search_layout:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
         }
+
+    }
+
+    private void startLocation() {
+        toast("dianji");
+        if (Build.VERSION.SDK_INT>Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},100);
+            }
+        		}
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==100) {
+
+        		}
     }
 
     @Override
@@ -290,7 +317,6 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
         recyclerViewContainer.addView(projectRecyclerview);
         fragementHomePresenter.getHomeTenderData("1", "14000");
     }
-
     @Override
     public void onGetHomeDataFailed(String msg) {
     }

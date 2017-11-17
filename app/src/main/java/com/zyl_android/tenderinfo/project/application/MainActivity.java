@@ -1,16 +1,20 @@
 package com.zyl_android.tenderinfo.project.application;
 
+import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
+import com.zyl_android.tenderinfo.project.ui.baseui.MPermissionsActivity;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentAsk;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentHome;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentMy;
@@ -19,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MPermissionsActivity {
 
     @BindView(R.id.bottomhome)
     RelativeLayout bottomhome;
@@ -58,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 add(R.id.fragementcontainer, fragment_Ask).hide(fragment_Ask).add(R.id.fragementcontainer, fragment_My).hide(fragment_My)
                 .commit();
     }
+
+
 
     @OnClick({R.id.bottomhome, R.id.bottomask, R.id.bottomy})
     public void onViewClicked(View view) {
