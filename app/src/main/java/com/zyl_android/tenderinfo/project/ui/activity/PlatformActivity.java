@@ -16,21 +16,6 @@ import butterknife.OnClick;
 public  class PlatformActivity extends BaseWebViewActivity {
 
     @Override
-    protected void onrefresh() {
-
-    }
-
-    @Override
-    protected void onloadMore() {
-
-    }
-
-    @Override
-    protected void loadData(boolean isLoadMore) {
-
-    }
-
-    @Override
     protected void initWebView() {
         title.setText("招标平台");
         titleBackImage.setVisibility(View.VISIBLE);

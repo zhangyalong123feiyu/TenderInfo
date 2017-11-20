@@ -16,16 +16,6 @@ import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
 public class FragmentAsk extends BaseFragement {
 
     @Override
-    protected void refreshData() {
-
-    }
-
-    @Override
-    protected void loadMoreData() {
-
-    }
-
-    @Override
     protected int getFragementHomeLayout() {
         return R.layout.fragment_ask;
     }

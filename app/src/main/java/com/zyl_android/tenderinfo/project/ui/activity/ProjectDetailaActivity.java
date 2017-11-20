@@ -9,25 +9,9 @@ import com.zyl_android.tenderinfo.project.ui.baseui.BaseWebViewActivity;
  */
 
 public  class ProjectDetailaActivity extends BaseWebViewActivity {
-
-    @Override
-    protected void onrefresh() {
-
-    }
-
-    @Override
-    protected void onloadMore() {
-
-    }
-
     @Override
     protected int getChildlayout() {
         return R.layout.activity_h5;
-    }
-
-    @Override
-    protected void loadData(boolean isLoadMore) {
-
     }
 
     @Override

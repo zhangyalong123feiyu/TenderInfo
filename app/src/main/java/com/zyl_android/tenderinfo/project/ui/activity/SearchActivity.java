@@ -94,15 +94,6 @@ public class SearchActivity extends BaseActivity implements SearchActivityView{
                 String editContent = searchEdit.getText().toString().trim();
                 if (TextUtils.isEmpty(editContent)) {
                     toast("请确保您要收索的内容不为空");
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                                    10001);//自定义的code
-                        }
-                    }
-
                 		}else {
                     hotWordsSearch(editContent);
                 }

@@ -55,6 +55,7 @@
                 android:paddingTop="16dp">
 
                 <ImageView
+                    android:id="@+id/imageView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/img_my_top" />
@@ -328,7 +329,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/fra_my_login_icon"
+                android:id="@+id/userPhoto"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="50dp"
@@ -337,12 +338,12 @@
                 android:src="@mipmap/wode_toux" />
 
             <Button
-                android:id="@+id/fra_my_login_name"
+                android:id="@+id/doLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/fra_my_login_icon"
+                android:layout_toRightOf="@id/userPhoto"
                 android:background="@null"
                 android:text="请点击登录"
                 android:textColor="@color/black"

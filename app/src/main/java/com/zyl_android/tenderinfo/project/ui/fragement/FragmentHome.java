@@ -278,20 +278,19 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
 
     private void startLocation() {
         toast("dianji");
-        if (Build.VERSION.SDK_INT>Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},100);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+//                    != PackageManager.PERMISSION_GRANTED) {
+//                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},100);
+//            }
+//        }
+        requestPermission(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},"我要定位权限",
+        new GrantedResult() {
+            @Override
+            public void onResult(boolean granted) {
+
             }
-        		}
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode==100) {
-
-        		}
+        });
     }
 
     @Override
@@ -300,7 +299,6 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
             String url = bannerList.get(i).getImgUrl();
             bannerUrl.add(Constants.baseUrl_pis + url);
         }
-
     }
 
     @Override

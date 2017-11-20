@@ -1,6 +1,7 @@
 package com.zyl_android.tenderinfo.mvp.model;
 
 import com.zyl_android.tenderinfo.project.api.SearchResultActivityApi;
+import com.zyl_android.tenderinfo.project.application.Constants;
 import com.zyl_android.tenderinfo.project.bean.SearchResultBean;
 import com.zyl_android.tenderinfo.project.utils.RetrofitUtil;
 
@@ -14,7 +15,7 @@ import rx.Observable;
 
 public class SearchResultAcitvityModel {
     public Observable<SearchResultBean> searchHotWords(String pageNumb,String content){
-        SearchResultActivityApi searchResultInofApi = RetrofitUtil.creatApi(SearchResultActivityApi.class);
+        SearchResultActivityApi searchResultInofApi = RetrofitUtil.creatApi(SearchResultActivityApi.class, Constants.baseUrl_pis);
         RequestBody requestBodyKey=RequestBody.create(MediaType.parse("text/plain"),pageNumb);
         RequestBody requestBodyValue=RequestBody.create(MediaType.parse("text/plain"),content);
         return searchResultInofApi.doSearch(requestBodyKey,requestBodyValue);

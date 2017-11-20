@@ -29,12 +29,12 @@ public class RetrofitUtil {
     private static Retrofit retrofitInstance=null;
     private RetrofitUtil(){
     }
-    public static Retrofit getRetrofit(){
+    public static Retrofit getRetrofit(String url){
         if (retrofitInstance==null) {
             synchronized (Retrofit.class){
                 if (retrofitInstance==null) {//双重锁，仅第一次调用时使用
                     OkHttpClient okHttpClient=new OkHttpClient();
-                    retrofitInstance=new Retrofit.Builder().client(okHttpClient).baseUrl(Constants.baseUrl_pis).
+                    retrofitInstance=new Retrofit.Builder().client(okHttpClient).baseUrl(url).
                             addCallAdapterFactory(RxJavaCallAdapterFactory.create()).//使其支持observable,默认支持call<String>有DefaultFactory支持
                             addConverterFactory(GsonConverterFactory.create()).build();
                 }
@@ -43,8 +43,8 @@ public class RetrofitUtil {
         return retrofitInstance;
     }
     //创建API类
-    public static <T> T creatApi(Class<T> tClass){
-       return getRetrofit().create(tClass);
+    public static <T> T creatApi(Class<T> tClass,String url){
+       return getRetrofit(url).create(tClass);
     }
     //创建okhttpclient
     public static OkHttpClient getOkhttpClient(){

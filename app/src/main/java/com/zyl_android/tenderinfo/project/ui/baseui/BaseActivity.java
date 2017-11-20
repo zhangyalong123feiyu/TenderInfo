@@ -81,9 +81,9 @@ public abstract class BaseActivity extends MPermissionsActivity {
         });
     }
 
-    protected abstract void onrefresh();
+    protected  void onrefresh(){};
 
-    protected abstract void onloadMore();
+    protected  void onloadMore(){};
 
     protected SmartRefreshLayout getSmartRefreshLayout() {
         return smartRefreshLayout;
@@ -120,10 +120,10 @@ public abstract class BaseActivity extends MPermissionsActivity {
 
     protected abstract void initView();
 
-    protected abstract void loadData(boolean isLoadMore);
+    protected  void loadData(boolean isLoadMore){};
 
     /*---------------------------------------------------------------------------以下是android6.0动态授权的封装十分好用---------------------------------------------------------------------------*/
-    private int                   mPermissionIdx = 0x10;//请求权限索引
+    private int  mPermissionIdx = 0x10;//请求权限索引
     private SparseArray<GrantedResult> mPermissions   = new SparseArray<>();//请求权限运行列表
     @SuppressLint("Override")
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

@@ -87,9 +87,9 @@ public abstract class BaseFragement extends Fragment {
         });
     }
 
-    protected abstract void refreshData();
+    protected  void refreshData(){};
 
-    protected abstract void loadMoreData();
+    protected  void loadMoreData(){};
 
     protected abstract int getFragementHomeLayout();
 

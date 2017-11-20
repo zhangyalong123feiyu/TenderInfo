@@ -1,6 +1,7 @@
 package com.zyl_android.tenderinfo.mvp.model;
 
 import com.zyl_android.tenderinfo.project.api.SearchActivityApi;
+import com.zyl_android.tenderinfo.project.application.Constants;
 import com.zyl_android.tenderinfo.project.bean.HotWordsBean;
 import com.zyl_android.tenderinfo.project.utils.RetrofitUtil;
 
@@ -12,7 +13,7 @@ import rx.Observable;
 
 public class SearchActivityModel {
     public Observable<HotWordsBean> getHotWords(){
-        SearchActivityApi searchActivityApi = RetrofitUtil.creatApi(SearchActivityApi.class);
+        SearchActivityApi searchActivityApi = RetrofitUtil.creatApi(SearchActivityApi.class, Constants.baseUrl_pis);
         return searchActivityApi.getHotWords();
     }
 }

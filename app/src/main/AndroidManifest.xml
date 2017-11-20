@@ -28,6 +28,7 @@
         <activity android:name=".project.ui.activity.SearchActivity" android:screenOrientation="portrait"/>
         <activity android:name=".project.ui.activity.SearchResultActivity" android:screenOrientation="portrait"/>
         <activity android:name=".project.ui.activity.ProjectDetailaActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".project.ui.activity.LoginActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
