@@ -16,11 +16,13 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.zyl_android.tenderinfo.R;
 
+import org.litepal.LitePalApplication;
+
 /**
  * Created by bibinet on 2017-11-4.
  */
 
-public class TenderApplication extends Application {
+public class TenderApplication extends LitePalApplication {
     public static Context context;
     @Override
     public void onCreate() {

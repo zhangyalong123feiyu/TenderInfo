@@ -12,12 +12,15 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.zyl_android.tenderinfo.R;
+import com.zyl_android.tenderinfo.project.bean.LoginResultBean;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
 import com.zyl_android.tenderinfo.project.ui.baseui.MPermissionsActivity;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentAsk;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentHome;
 import com.zyl_android.tenderinfo.project.ui.fragement.FragmentMy;
+import com.zyl_android.tenderinfo.project.utils.SharedPresUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +48,10 @@ public class MainActivity extends MPermissionsActivity {
         ButterKnife.bind(this);
         initStateBarTransparent();
         initView();
+        initData();
     }
+
+
     public void initStateBarTransparent() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -63,6 +69,12 @@ public class MainActivity extends MPermissionsActivity {
                 .commit();
     }
 
+    private void initData() {
+        SharedPresUtils sharedPresUtils = SharedPresUtils.getsSharedPresUtils(this);
+        String loginReseultInfo = sharedPresUtils.getString("loginUerInfo", null);
+        Gson gson=new Gson();
+        Constants.loginResultInfo=gson.fromJson(loginReseultInfo, LoginResultBean.class);
+    }
 
 
     @OnClick({R.id.bottomhome, R.id.bottomask, R.id.bottomy})
@@ -92,6 +104,9 @@ public class MainActivity extends MPermissionsActivity {
                 trx.add(R.id.fragementcontainer, fragments[index]);
             }
             trx.show(fragments[index]).commit();
+            if (fragments[index] instanceof FragmentMy) {
+              fragment_My.startAnimation();
+            		}
         }
         mTabs[currentTabIndex].setSelected(false);
         // 把当前tab设为选中状态

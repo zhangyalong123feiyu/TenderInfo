@@ -13,7 +13,7 @@ import rx.Observable;
 
 public class SearchActivityModel {
     public Observable<HotWordsBean> getHotWords(){
-        SearchActivityApi searchActivityApi = RetrofitUtil.creatApi(SearchActivityApi.class, Constants.baseUrl_pis);
+        SearchActivityApi searchActivityApi = RetrofitUtil.creatHttpApi(SearchActivityApi.class);
         return searchActivityApi.getHotWords();
     }
 }

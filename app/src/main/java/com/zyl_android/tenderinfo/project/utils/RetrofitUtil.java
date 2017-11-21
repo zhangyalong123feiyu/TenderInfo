@@ -26,25 +26,43 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitUtil {
-    private static Retrofit retrofitInstance=null;
+    private static Retrofit retrofitInstanceHttp=null;
+    private static Retrofit retrofitInstanceHttps=null;
     private RetrofitUtil(){
     }
-    public static Retrofit getRetrofit(String url){
-        if (retrofitInstance==null) {
+    public static Retrofit getHttpRetrofit(){
+        if (retrofitInstanceHttp==null) {
             synchronized (Retrofit.class){
-                if (retrofitInstance==null) {//双重锁，仅第一次调用时使用
+                if (retrofitInstanceHttp==null) {//双重锁，仅第一次调用时使用
                     OkHttpClient okHttpClient=new OkHttpClient();
-                    retrofitInstance=new Retrofit.Builder().client(okHttpClient).baseUrl(url).
+                    retrofitInstanceHttp=new Retrofit.Builder().client(okHttpClient).baseUrl(Constants.baseUrl_pis).
                             addCallAdapterFactory(RxJavaCallAdapterFactory.create()).//使其支持observable,默认支持call<String>有DefaultFactory支持
                             addConverterFactory(GsonConverterFactory.create()).build();
                 }
             }
         }
-        return retrofitInstance;
+        return retrofitInstanceHttp;
+    }
+    public static Retrofit getHttpsRetrofit(){
+        if (retrofitInstanceHttps==null) {
+            synchronized (Retrofit.class){
+                if (retrofitInstanceHttps==null) {//双重锁，仅第一次调用时使用
+                    OkHttpClient okHttpClient=new OkHttpClient();
+                    retrofitInstanceHttps=new Retrofit.Builder().client(okHttpClient).baseUrl(Constants.baseUrl_iip).
+                            addCallAdapterFactory(RxJavaCallAdapterFactory.create()).//使其支持observable,默认支持call<String>有DefaultFactory支持
+                            addConverterFactory(GsonConverterFactory.create()).build();
+                }
+            }
+        }
+        return retrofitInstanceHttps;
     }
     //创建API类
-    public static <T> T creatApi(Class<T> tClass,String url){
-       return getRetrofit(url).create(tClass);
+    public static <T> T creatHttpsApi(Class<T> tClass){
+       return getHttpsRetrofit().create(tClass);
+    }
+    //创建API类
+    public static <T> T creatHttpApi(Class<T> tClass){
+       return getHttpRetrofit().create(tClass);
     }
     //创建okhttpclient
     public static OkHttpClient getOkhttpClient(){

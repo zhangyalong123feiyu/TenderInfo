@@ -54,4 +54,6 @@ dependencies {
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.github.zhangyalong123feiyu:GeneralUtils:v1.1'
     compile 'com.yanzhenjie.nohttp:okhttp:1.1.4'
+    //数据库使用库
+    compile 'org.litepal.android:core:1.6.0'
 }

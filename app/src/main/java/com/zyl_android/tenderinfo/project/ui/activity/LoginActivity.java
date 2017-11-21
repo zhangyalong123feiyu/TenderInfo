@@ -16,6 +16,7 @@ import com.zyl_android.tenderinfo.mvp.view.LoginActivityView;
 import com.zyl_android.tenderinfo.project.application.Constants;
 import com.zyl_android.tenderinfo.project.bean.LoginResultBean;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
+import com.zyl_android.tenderinfo.project.utils.SharedPresUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -88,9 +89,11 @@ public class LoginActivity extends BaseActivity implements LoginActivityView{
     @Override
     public void onLoginSucess(LoginResultBean loginResultBean) {
         Gson gson=new Gson();
-        String loginUserInfo = gson.toJson(loginResultBean.getUser());
+        String loginUserInfo = gson.toJson(loginResultBean);
+        log("logresultBean",loginResultBean.toString());
         Constants.LoginUerinfo=loginUserInfo;
-
+        SharedPresUtils shareUtils = SharedPresUtils.getsSharedPresUtils(this);
+        shareUtils.putString("loginUerInfo",loginUserInfo);
         finish();
     }
 

@@ -137,11 +137,6 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
     }
 
     @Override
-    protected void loadMoreData() {
-
-    }
-
-    @Override
     protected int getFragementHomeLayout() {
         return R.layout.fragment_home;
     }

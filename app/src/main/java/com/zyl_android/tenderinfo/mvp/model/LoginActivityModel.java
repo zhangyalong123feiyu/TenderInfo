@@ -1,7 +1,6 @@
 package com.zyl_android.tenderinfo.mvp.model;
 
 import com.zyl_android.tenderinfo.project.api.LoginApi;
-import com.zyl_android.tenderinfo.project.application.Constants;
 import com.zyl_android.tenderinfo.project.bean.LoginResultBean;
 import com.zyl_android.tenderinfo.project.utils.RetrofitUtil;
 
@@ -13,7 +12,7 @@ import rx.Observable;
 
 public class LoginActivityModel {
     public Observable<LoginResultBean> doLogin(String account,String password){
-        LoginApi loginResultApi = RetrofitUtil.creatApi(LoginApi.class, Constants.baseUrl_iip);
+        LoginApi loginResultApi = RetrofitUtil.creatHttpsApi(LoginApi.class);
         return loginResultApi.doLogin(account,password);
     }
 }

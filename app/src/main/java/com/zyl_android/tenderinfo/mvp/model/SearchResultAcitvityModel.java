@@ -15,7 +15,7 @@ import rx.Observable;
 
 public class SearchResultAcitvityModel {
     public Observable<SearchResultBean> searchHotWords(String pageNumb,String content){
-        SearchResultActivityApi searchResultInofApi = RetrofitUtil.creatApi(SearchResultActivityApi.class, Constants.baseUrl_pis);
+        SearchResultActivityApi searchResultInofApi = RetrofitUtil.creatHttpApi(SearchResultActivityApi.class);
         RequestBody requestBodyKey=RequestBody.create(MediaType.parse("text/plain"),pageNumb);
         RequestBody requestBodyValue=RequestBody.create(MediaType.parse("text/plain"),content);
         return searchResultInofApi.doSearch(requestBodyKey,requestBodyValue);

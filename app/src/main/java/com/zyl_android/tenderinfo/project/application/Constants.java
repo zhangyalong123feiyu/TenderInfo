@@ -1,5 +1,7 @@
 package com.zyl_android.tenderinfo.project.application;
 
+import com.zyl_android.tenderinfo.project.bean.LoginResultBean;
+
 /**
  * Created by bibinet on 2017-11-6.
  */
@@ -10,4 +12,5 @@ public class Constants {
     public static String baseUrl_pis="http://221.204.177.104:19180/";
     //用户登录以后的信息
     public static String LoginUerinfo=null;
+    public static LoginResultBean loginResultInfo=null;
 }

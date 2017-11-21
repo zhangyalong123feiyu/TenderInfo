@@ -13,9 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zyl_android.tenderinfo.R;
+import com.zyl_android.tenderinfo.project.application.Constants;
 import com.zyl_android.tenderinfo.project.ui.activity.LoginActivity;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
+import com.zyl_android.tenderinfo.project.utils.AnimationManager;
+import com.zyl_android.tenderinfo.project.utils.Base64MapUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,7 +57,6 @@ public class FragmentMy extends BaseFragement {
     Button doLogin;
     @BindView(R.id.fra_my_bottom_move)
     RelativeLayout fraMyBottomMove;
-    Unbinder unbinder;
 
     @Override
     protected int getFragementHomeLayout() {
@@ -65,9 +68,26 @@ public class FragmentMy extends BaseFragement {
         titleLayout.setVisibility(View.GONE);
     }
 
+
+
     @Override
     protected void initData() {
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (islogin()) {
+            doLogin.setText(Constants.loginResultInfo.getUser().getEnterprise().getContactName());
+//            Glide.with(this).load(Base64MapUtils.stringToBitmap(Constants.loginResultInfo.getUser().getImage())).into(userPhoto);
+            userPhoto.setImageBitmap(Base64MapUtils.stringToBitmap(Constants.loginResultInfo.getUser().getImage()));
+        		}
+    }
+    private boolean islogin(){
+        if (Constants.loginResultInfo!=null) {
+        			return true;
+        		}
+        		return false;
     }
     @OnClick({R.id.companyInfo, R.id.privateOdering, R.id.foucsMy, R.id.aboutOur, R.id.serviceTerm, R.id.legalStatement, R.id.setting, R.id.userPhoto, R.id.doLogin})
     public void onViewClicked(View view) {
@@ -89,8 +109,22 @@ public class FragmentMy extends BaseFragement {
             case R.id.userPhoto:
                 break;
             case R.id.doLogin:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                if (!islogin()) {
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
         }
+    }
+    public void startAnimation(){
+        int baseTime=500;
+        int increaseTime=60;
+        AnimationManager.topToBottom(fraMyTopMove,1000,baseTime);
+        AnimationManager.bottomToTop(fraMyBottomMove,2000,baseTime);
+        AnimationManager.bottomToTop(companyInfo, 2000, baseTime);
+        AnimationManager.bottomToTop(foucsMy, 2000, baseTime + (increaseTime * 1));
+        AnimationManager.bottomToTop(aboutOur, 2000, baseTime + (increaseTime * 2));
+        AnimationManager.bottomToTop(serviceTerm, 2000, baseTime + (increaseTime * 3));
+        AnimationManager.bottomToTop(legalStatement, 2000, baseTime + (increaseTime * 4));
+        AnimationManager.bottomToTop(setting, 2000, baseTime + (increaseTime * 5));
     }
 }

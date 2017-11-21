@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dbname value="User" />
+    <version value="1" />
+    <list>
+        <mapping class="com.zyl_android.tenderinfo.project.sql.UserTable" />
+    </list>
+    <storage value="external" />
+</resources>
