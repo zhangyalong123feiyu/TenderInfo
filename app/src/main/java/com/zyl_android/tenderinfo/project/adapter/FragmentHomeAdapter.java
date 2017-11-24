@@ -3,6 +3,7 @@ package com.zyl_android.tenderinfo.project.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,9 +67,9 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof FragHomeViewHolderOne) {
             if (projectType==1) {
                 ((FragHomeViewHolderOne) holder).projcetName.setText("项目信息");
-            		}else if (projectType==2) {
+            }else if (projectType==2) {
                 ((FragHomeViewHolderOne) holder).projcetName.setText("招标信息");
-            				}else {
+            }else {
                 ((FragHomeViewHolderOne) holder).projcetName.setText("采购信息");
             }
         }else if (holder instanceof FragHomeViewHolderTwo) {
@@ -76,14 +77,16 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((FragHomeViewHolderTwo) holder).projectDescrp.setText(homeProjectInfoList.get(position-1).getProjectDescrp());
             ((FragHomeViewHolderTwo) holder).projectLoaction.setText(homeProjectInfoList.get(position-1).getProjectLocation());
             ((FragHomeViewHolderTwo) holder).projectTime.setText(homeProjectInfoList.get(position-1).getProjectTime());
+            Log.i("TAG","type============================="+homeProjectInfoList.get(position-1).getProjectType());
             if (homeProjectInfoList.get(position-1).getProjectType().equals("A")) {
                 ((FragHomeViewHolderTwo) holder).projectImage.setImageResource(R.mipmap.shouye_gongcheng);
             } else if (homeProjectInfoList.get(position-1).getProjectType().equals("B")) {
                 ((FragHomeViewHolderTwo) holder).projectImage.setImageResource(R.mipmap.shouye_huowu);
-            } else if(homeProjectInfoList.get(position-1).getProjectType().equals("C")){
+            } else
+            {
                 ((FragHomeViewHolderTwo) holder).projectImage.setImageResource(R.mipmap.shouye_fuw);
             }
-        		}
+        }
     }
 
     @Override
@@ -93,17 +96,17 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @OnClick({R.id.projectInfoMore,R.id.projectLayout})
     public void onViewClicked(View view) {
-        	switch (view.getId()) {
-        			case R.id.projectInfoMore:
-                        Toast.makeText(context,"点击更多",Toast.LENGTH_SHORT).show();
-        				break;
-        			case R.id.projectLayout:
+        switch (view.getId()) {
+            case R.id.projectInfoMore:
+                Toast.makeText(context,"点击更多",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.projectLayout:
 
-        				break;
+                break;
 
-        			default:
-        				break;
-        			}
+            default:
+                break;
+        }
     }
 
     class FragHomeViewHolderOne extends RecyclerView.ViewHolder {

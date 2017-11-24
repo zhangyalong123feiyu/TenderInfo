@@ -3,8 +3,20 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/searchResultRcylerView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/searchResultRcylerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/noDataView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:src="@mipmap/img_search_not_data"/>
+    </RelativeLayout>
+
 </LinearLayout>

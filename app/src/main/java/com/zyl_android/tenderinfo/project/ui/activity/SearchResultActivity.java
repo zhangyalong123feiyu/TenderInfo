@@ -30,6 +30,8 @@ import butterknife.OnClick;
 public class SearchResultActivity extends BaseActivity implements SearchResultActivityView{
     @BindView(R.id.searchResultRcylerView)
     RecyclerView searchResultRcylerView;
+    @BindView(R.id.noDataView)
+    ImageView noDataView;
     private String content;
     private int pageNumb=1;
     private SearchResultActivityAdapter adapter;
@@ -86,12 +88,17 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
         waitView.stop();
         waitView.setVisibility(View.GONE);
         if (isloadmore) {
+            noDataViewisShow(searchResultInfo);
             if (searchResultInfo.size()==0) {//判断是否完成加载
                 getSmartRefreshLayout().finishLoadmore();
+                noDataView.setVisibility(View.VISIBLE);
+            }else {
+                noDataView.setVisibility(View.GONE);
             }
             getSmartRefreshLayout().finishLoadmore();//加载完成
             datas.addAll(searchResultInfo);
         		}else {
+            noDataViewisShow(searchResultInfo);//判断是否显示view
             getSmartRefreshLayout().finishRefresh();//刷新完成
             datas.clear();
             datas.addAll(searchResultInfo);
@@ -103,6 +110,14 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
             adapter.notifyDataSetChanged();
         }
     }
+
+    private void noDataViewisShow(List<SearchResultBean.ItemsBean> searchResultInfo) {
+        if (searchResultInfo.size()>0) {
+            noDataView.setVisibility(View.GONE);
+        		}
+        noDataView.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void onGetSearchResultFailed(String msg) {
         log("搜索结果错误",msg);

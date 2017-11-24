@@ -15,6 +15,6 @@ import rx.Observable;
 
 public interface SearchResultActivityApi {
     @Multipart
-    @POST("appData/selectPage.json")
+    @POST("appData/selectPage.json")//服务器接受方式为表单，所以使用RequestBody
     Observable<SearchResultBean> doSearch(@Part("pageIndex") RequestBody pageNum, @Part("messageLike") RequestBody content);
 }

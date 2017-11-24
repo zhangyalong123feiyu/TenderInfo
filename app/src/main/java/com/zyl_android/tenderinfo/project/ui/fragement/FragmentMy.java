@@ -2,29 +2,24 @@ package com.zyl_android.tenderinfo.project.ui.fragement;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.project.application.Constants;
 import com.zyl_android.tenderinfo.project.ui.activity.LoginActivity;
+import com.zyl_android.tenderinfo.project.ui.activity.SettingActivity;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
 import com.zyl_android.tenderinfo.project.utils.AnimationManager;
-import com.zyl_android.tenderinfo.project.utils.Base64MapUtils;
+import com.zyl_android.tenderinfo.project.utils.B64PhotoUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,9 +74,11 @@ public class FragmentMy extends BaseFragement {
         super.onResume();
         if (islogin()) {
             doLogin.setText(Constants.loginResultInfo.getUser().getEnterprise().getContactName());
-//            Glide.with(this).load(Base64MapUtils.stringToBitmap(Constants.loginResultInfo.getUser().getImage())).into(userPhoto);
-            userPhoto.setImageBitmap(Base64MapUtils.stringToBitmap(Constants.loginResultInfo.getUser().getImage()));
-        		}
+            userPhoto.setImageBitmap(B64PhotoUtils.makeRoundCorner(B64PhotoUtils.stringToBitmap(Constants.loginResultInfo.getUser().getImage())));
+        		}else {
+            doLogin.setText("点击请登录");
+            userPhoto.setImageResource(R.mipmap.wode_toux);
+        }
     }
     private boolean islogin(){
         if (Constants.loginResultInfo!=null) {
@@ -105,6 +102,7 @@ public class FragmentMy extends BaseFragement {
             case R.id.legalStatement:
                 break;
             case R.id.setting:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.userPhoto:
                 break;

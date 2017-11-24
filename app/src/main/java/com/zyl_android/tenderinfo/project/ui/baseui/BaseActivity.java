@@ -28,6 +28,7 @@ import com.zyl_android.tenderinfo.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by bibinet on 2017-11-4.
@@ -67,7 +68,15 @@ public abstract class BaseActivity extends MPermissionsActivity {
         initStateBarTransparent();
     }
 
+
     private void initBaseLoadData() {
+        //删除当前页
+        titleBackImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         smartRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {

@@ -74,6 +74,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView{
                 finish();
                 break;
             case R.id.regester:
+                startActivity(new Intent(this, RegistActivity.class));
                 break;
             case R.id.btn_login:
                 toast("点击");
@@ -90,8 +91,8 @@ public class LoginActivity extends BaseActivity implements LoginActivityView{
     public void onLoginSucess(LoginResultBean loginResultBean) {
         Gson gson=new Gson();
         String loginUserInfo = gson.toJson(loginResultBean);
-        log("logresultBean",loginResultBean.toString());
         Constants.LoginUerinfo=loginUserInfo;
+        Constants.loginResultInfo=loginResultBean;
         SharedPresUtils shareUtils = SharedPresUtils.getsSharedPresUtils(this);
         shareUtils.putString("loginUerInfo",loginUserInfo);
         finish();

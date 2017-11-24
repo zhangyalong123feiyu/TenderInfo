@@ -157,17 +157,16 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
         });
         drawable= getResources().getDrawable(R.drawable.homerange_shape);//设置圆角
         fragementHomePresenter = new FragementHomePresenter(this);
-        fragementHomePresenter.getBannerData();
         BannerUtils bannerUtils = new BannerUtils(getActivity(), viewpager, groupContain, bannerUrl);
         bannerUtils.startPlayBanner();
-        getSmartRefreshLayout().setEnabled(true);
-
+        getSmartRefreshLayout().setEnableRefresh(true);
     }
 
     @Override
     protected void initData() {
+        fragementHomePresenter.getBannerData();
         if (isRefresh) {
-        			recyclerViewContainer.removeAllViews();
+            recyclerViewContainer.removeAllViews();
             isRefresh=false;
         		}
         if (NetworkUtils.isNetworkAvailable(getActivity())) {
@@ -273,16 +272,13 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
 
     private void startLocation() {
         toast("dianji");
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-//                    != PackageManager.PERMISSION_GRANTED) {
-//                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},100);
-//            }
-//        }
         requestPermission(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},"我要定位权限",
         new GrantedResult() {
             @Override
             public void onResult(boolean granted) {
+                    if (granted) {
+                    		toast("我要开始定位了");
+                    		}
 
             }
         });

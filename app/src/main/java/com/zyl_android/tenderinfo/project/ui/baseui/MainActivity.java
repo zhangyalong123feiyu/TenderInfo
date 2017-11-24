@@ -1,4 +1,4 @@
-package com.zyl_android.tenderinfo.project.application;
+package com.zyl_android.tenderinfo.project.ui.baseui;
 
 import android.Manifest;
 import android.os.Build;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zyl_android.tenderinfo.R;
+import com.zyl_android.tenderinfo.project.application.Constants;
 import com.zyl_android.tenderinfo.project.bean.LoginResultBean;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
 import com.zyl_android.tenderinfo.project.ui.baseui.MPermissionsActivity;

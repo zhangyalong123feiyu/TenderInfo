@@ -11,7 +11,7 @@ import rx.Observable;
  * Created by bibinet on 2017-11-18.
  */
 
-public interface LoginApi {
+public interface LoginActivityApi {
     @POST("user/login.json")
     Observable<LoginResultBean> doLogin(@Query("account") String account,@Query("password") String passwrod);
 }
