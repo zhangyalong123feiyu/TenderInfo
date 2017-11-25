@@ -2,6 +2,7 @@ package com.zyl_android.tenderinfo.project.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,7 +68,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView{
         loginActivityPresenter=new LoginActivityPresenter(this);
     }
 
-    @OnClick({R.id.backImage, R.id.regester, R.id.btn_login, R.id.fastLogin})
+    @OnClick({R.id.backImage, R.id.regester, R.id.btn_login, R.id.fastLogin,R.id.seePassword})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.backImage:
@@ -77,10 +78,19 @@ public class LoginActivity extends BaseActivity implements LoginActivityView{
                 startActivity(new Intent(this, RegistActivity.class));
                 break;
             case R.id.btn_login:
-                toast("点击");
                 String account = inputPhoneNumber.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
                 loginActivityPresenter.doLogin(account,password);
+                break;
+            case R.id.seePassword:
+                if (seePassword.isSelected()) {
+                    seePassword.setSelected(true);
+                    inputPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }else {
+                    seePassword.setSelected(false);
+                    inputPassword.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+                inputPassword.setSelection(inputPassword.getSelectionEnd());
                 break;
             case R.id.fastLogin:
                 break;
