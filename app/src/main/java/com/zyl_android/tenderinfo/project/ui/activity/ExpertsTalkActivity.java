@@ -63,6 +63,12 @@ public class ExpertsTalkActivity extends BaseActivity implements ExpertsTalkActi
         waitView.setVisibility(View.GONE);
         ExpertsTalkActivityAdapter adapter=new ExpertsTalkActivityAdapter(expertsData,this);
         expertsRecyler.setAdapter(adapter);
+        adapter.setOnPostDataClickListioner(new ExpertsTalkActivityAdapter.OnPostDataClickListioner() {
+            @Override
+            public void onPostDataClickListioner(String askContent,String askTitle) {
+                toast("提交数据");
+            }
+        });
     }
 
     @Override

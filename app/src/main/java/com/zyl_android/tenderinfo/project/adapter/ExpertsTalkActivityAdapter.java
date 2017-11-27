@@ -30,13 +30,13 @@ import butterknife.OnClick;
 public class ExpertsTalkActivityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<ExpertsDataBean.ItemsBean> expertDataList = new ArrayList<>();
     private Context context;
-    private static int contentTypeView = 1;
-    private static int expertsTypeView = 2;
-    private static int postTypeView = 3;
-
+    private static final int contentTypeView = 1;
+    private static final int expertsTypeView = 2;
+    private static final int postTypeView = 3;
+    private int oldPostion=-1;//初始没有点击时的位置
     private String askContent;
     private String askTitle;
-
+    private OnPostDataClickListioner onPostDataClickListioner;
     public ExpertsTalkActivityAdapter(List<ExpertsDataBean.ItemsBean> expertDataList, Context context) {
         this.expertDataList = expertDataList;
         this.context = context;
@@ -69,7 +69,7 @@ public class ExpertsTalkActivityAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ExpertsViewHolderOne) {
             askContent = ((ExpertsViewHolderOne) holder).questionContent.getText().toString().trim();
             askTitle = ((ExpertsViewHolderOne) holder).questionContent.getText().toString().trim();
@@ -79,6 +79,18 @@ public class ExpertsTalkActivityAdapter extends RecyclerView.Adapter<RecyclerVie
             ((ExpertsViewHolderTwo) holder).expertsTitle.setText(expertDataList.get(position - 1).getTitle());
             Bitmap bitmap = B64PhotoUtils.stringToBitmap(expertDataList.get(position - 1).getHeadPortrait());
             ((ExpertsViewHolderTwo) holder).expertsPhoto.setImageBitmap(B64PhotoUtils.makeRoundCorner(bitmap));
+            final int newPostion=position;
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (oldPostion!=newPostion) {
+                        oldPostion=newPostion;
+                        ((ExpertsViewHolderTwo) holder).expertsLayout.setSelected(false);
+                    }else {
+                        ((ExpertsViewHolderTwo) holder).expertsLayout.setSelected(true);
+                    }
+                }
+            });
         }
     }
 
@@ -86,22 +98,9 @@ public class ExpertsTalkActivityAdapter extends RecyclerView.Adapter<RecyclerVie
     public int getItemCount() {
         return expertDataList.size() > 0 ? expertDataList.size() + 2 : 2;
     }
-
-    @OnClick({R.id.expertsLayout,R.id.postData})
-    public void onViewClicked(View view) {
-        	switch (view.getId()) {
-        			case R.id.expertsLayout:
-
-        				break;
-        			case R.id.postData:
-
-        				break;
-
-        			default:
-        				break;
-        			}
+    public void setOnPostDataClickListioner(OnPostDataClickListioner onPostDataClickListioner){
+        this.onPostDataClickListioner=onPostDataClickListioner;
     }
-
     class ExpertsViewHolderOne extends RecyclerView.ViewHolder {
         @BindView(R.id.userQuestion)
         EditText userQuestion;
@@ -126,7 +125,7 @@ public class ExpertsTalkActivityAdapter extends RecyclerView.Adapter<RecyclerVie
         @BindView(R.id.expertsLayout)
         LinearLayout expertsLayout;
 
-        public ExpertsViewHolderTwo(View itemView) {
+        public ExpertsViewHolderTwo(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -138,6 +137,15 @@ public class ExpertsTalkActivityAdapter extends RecyclerView.Adapter<RecyclerVie
         public ExpertsViewHolderThree(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            postData.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onPostDataClickListioner.onPostDataClickListioner(askContent,askTitle);
+                }
+            });
         }
+    }
+   public interface OnPostDataClickListioner{
+        void onPostDataClickListioner(String askContent,String questionContent);
     }
 }
