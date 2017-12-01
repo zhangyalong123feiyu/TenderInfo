@@ -41,7 +41,7 @@ import butterknife.Unbinder;
  * Created by bibinet on 2017-11-6.
  */
 
-public abstract class BaseFragement extends Fragment {
+public abstract class BaseFragement extends LazyFragement {
     private SmartRefreshLayout smartRefreshLayout;
     public RelativeLayout titleLayout;
     public TextView title_textView;
@@ -66,8 +66,9 @@ public abstract class BaseFragement extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        isInitView=true;
         initView();
-        initData();
+        lazyLoadData();//进行懒加载
     }
 
     private void initBaseView() {

@@ -3,15 +3,10 @@ package com.zyl_android.tenderinfo.project.ui.fragement;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zyl_android.generalutils.BannerUtils;
 import com.zyl_android.generalutils.NetworkUtils;
@@ -36,19 +30,18 @@ import com.zyl_android.tenderinfo.project.builder.ObservableScrollView;
 import com.zyl_android.tenderinfo.project.ui.activity.PlatformActivity;
 import com.zyl_android.tenderinfo.project.ui.activity.SearchActivity;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
+import com.zyl_android.tenderinfo.project.utils.CacheUtils.ACache;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FragmentHome extends BaseFragement implements FragmentHomeView {
-    private static final int REQUECT_CODE_LOCATION = 1;
     @BindView(R.id.viewpager)
     MyViewPager viewpager;
     @BindView(R.id.group_contain)
@@ -143,6 +136,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
 
     @Override
     protected void initView() {
+        isVisible=true;//设置fragement为可见状态
         titleLayout.setVisibility(View.GONE);
         scrollview.setScrollViewListener(new ObservableScrollView.ScrollViewListener() {
             @Override
@@ -160,6 +154,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
         BannerUtils bannerUtils = new BannerUtils(getActivity(), viewpager, groupContain, bannerUrl);
         bannerUtils.startPlayBanner();
         getSmartRefreshLayout().setEnableRefresh(true);
+
     }
 
     @Override
@@ -279,7 +274,6 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
                     if (granted) {
                     		toast("我要开始定位了");
                     		}
-
             }
         });
     }
@@ -289,6 +283,10 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
         for (int i = 0; i < bannerList.size(); i++) {
             String url = bannerList.get(i).getImgUrl();
             bannerUrl.add(Constants.baseUrl_pis + url);
+        }
+        //缓存测试
+        if (bannerUrl.size()!=0) {
+            fragementHomePresenter.downLoadImage(bannerUrl.get(1));
         }
     }
 
@@ -335,6 +333,17 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
     @Override
     public void onGetHomeBuyFailed(String msg) {
 
+    }
+
+    @Override
+    public void onDownLoadImageSucess(Bitmap bitmap) {
+        ACache aCache=ACache.get(getActivity());
+        aCache.put("banner1",bitmap);
+    }
+
+    @Override
+    public void onDownLoadImageFailed(String msg) {
+        Log.i("下载错误",msg);
     }
 
 }

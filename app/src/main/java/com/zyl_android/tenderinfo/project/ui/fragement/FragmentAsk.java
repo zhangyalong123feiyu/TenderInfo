@@ -2,22 +2,18 @@ package com.zyl_android.tenderinfo.project.ui.fragement;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.project.sql.UserTable;
 import com.zyl_android.tenderinfo.project.ui.activity.ExpertsTalkActivity;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
+import com.zyl_android.tenderinfo.project.utils.CacheUtils.ACache;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +28,6 @@ public class FragmentAsk extends BaseFragement {
     LinearLayout tenderBook;
     @BindView(R.id.tenderHelp)
     LinearLayout tenderHelp;
-    Unbinder unbinder;
 
     @Override
     protected int getFragementHomeLayout() {
@@ -42,7 +37,9 @@ public class FragmentAsk extends BaseFragement {
     @Override
     protected void initView() {
         title_textView.setText("比比驿站");
-        title_backImage.setVisibility(View.GONE);
+//        title_backImage.setVisibility(View.GONE);
+        ACache aCache=ACache.get(getActivity());
+     title_backImage.setImageBitmap(aCache.getAsBitmap("banner1"));
     }
 
     @Override

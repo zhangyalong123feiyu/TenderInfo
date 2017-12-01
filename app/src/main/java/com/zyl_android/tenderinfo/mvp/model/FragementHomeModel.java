@@ -1,5 +1,7 @@
 package com.zyl_android.tenderinfo.mvp.model;
 
+import android.graphics.Bitmap;
+
 import com.zyl_android.tenderinfo.project.api.BannerApi;
 import com.zyl_android.tenderinfo.project.api.FragmentHomeApi;
 import com.zyl_android.tenderinfo.project.application.Constants;
@@ -7,6 +9,8 @@ import com.zyl_android.tenderinfo.project.bean.BannerBean;
 import com.zyl_android.tenderinfo.project.bean.HomeFiveProjectBean;
 import com.zyl_android.tenderinfo.project.utils.RetrofitUtil;
 
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import rx.Observable;
 
@@ -34,5 +38,8 @@ public class FragementHomeModel {
         FragmentHomeApi fragmentHomeApi = RetrofitUtil.creatHttpApi(FragmentHomeApi.class);
         Observable<HomeFiveProjectBean> fiveProjectBeanObservable = fragmentHomeApi.getHomeBuyInfo(pageNum,location);
         return fiveProjectBeanObservable;
+    }
+    public Observable<ResponseBody> downLoadImage(String url){
+        return RetrofitUtil.creatHttpApi(BannerApi.class).downLoadBanner(url);
     }
 }

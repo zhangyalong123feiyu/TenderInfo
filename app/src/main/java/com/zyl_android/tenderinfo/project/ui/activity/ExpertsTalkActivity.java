@@ -13,6 +13,8 @@ import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.mvp.presenter.ExpertsTalkActivityPresenter;
 import com.zyl_android.tenderinfo.mvp.view.ExpertsTalkActivityView;
 import com.zyl_android.tenderinfo.project.adapter.ExpertsTalkActivityAdapter;
+import com.zyl_android.tenderinfo.project.application.Constants;
+import com.zyl_android.tenderinfo.project.bean.AskExpertsBean;
 import com.zyl_android.tenderinfo.project.bean.ExpertsDataBean;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
 
@@ -31,6 +33,8 @@ public class ExpertsTalkActivity extends BaseActivity implements ExpertsTalkActi
     RecyclerView expertsRecyler;
     @BindView(R.id.netErrorView)
     AppCompatImageView netErroView;
+    private ExpertsTalkActivityPresenter expertsTalkActivityPresenter;
+
     @Override
     protected int getChildlayout() {
         return R.layout.activity_expertstalk;
@@ -47,7 +51,7 @@ public class ExpertsTalkActivity extends BaseActivity implements ExpertsTalkActi
         		}else {
             netErroView.setVisibility(View.VISIBLE);
         }
-
+        expertsTalkActivityPresenter=new ExpertsTalkActivityPresenter(this);
     }
 
     @Override
@@ -65,8 +69,10 @@ public class ExpertsTalkActivity extends BaseActivity implements ExpertsTalkActi
         expertsRecyler.setAdapter(adapter);
         adapter.setOnPostDataClickListioner(new ExpertsTalkActivityAdapter.OnPostDataClickListioner() {
             @Override
-            public void onPostDataClickListioner(String askContent,String askTitle) {
+            public void onPostDataClickListioner(String askContent,String askTitle,String expertsCode) {
                 toast("提交数据");
+                expertsTalkActivityPresenter.postExpertsInfo(Constants.loginResultInfo.getUser().getUserId(),Constants.loginResultInfo.getUser().getEnterprise().getEnterpriseCode(),
+                        String.valueOf("1"),expertsCode,askTitle,askContent);
             }
         });
     }
@@ -76,5 +82,15 @@ public class ExpertsTalkActivity extends BaseActivity implements ExpertsTalkActi
         log("专家约谈错误",msg);
         waitView.stop();
         waitView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onPostExpertsDataSucess(AskExpertsBean askExpertsBean) {
+
+    }
+
+    @Override
+    public void onPostExpertsDataFailed(String msg) {
+        log("专家约谈提交错误",msg);
     }
 }

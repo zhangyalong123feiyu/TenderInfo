@@ -1,5 +1,6 @@
 package com.zyl_android.tenderinfo.mvp.view;
 
+import com.zyl_android.tenderinfo.project.bean.AskExpertsBean;
 import com.zyl_android.tenderinfo.project.bean.ExpertsDataBean;
 
 import java.util.List;
@@ -11,4 +12,6 @@ import java.util.List;
 public interface ExpertsTalkActivityView {
    void onGetExpertsDataSucess(List<ExpertsDataBean.ItemsBean> expertsData);
    void onGetExpertsDataFailed(String msg);
+   void onPostExpertsDataSucess(AskExpertsBean askExpertsBean);
+   void onPostExpertsDataFailed(String msg);
 }

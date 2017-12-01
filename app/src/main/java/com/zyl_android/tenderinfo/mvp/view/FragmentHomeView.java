@@ -1,5 +1,7 @@
 package com.zyl_android.tenderinfo.mvp.view;
 
+import android.graphics.Bitmap;
+
 import com.zyl_android.tenderinfo.project.bean.BannerBean;
 import com.zyl_android.tenderinfo.project.bean.HomeFiveProjectBean;
 
@@ -18,4 +20,7 @@ public interface FragmentHomeView {
     void onGetHomeTenderFailed(String msg);
     void onGetHomeBuySucess(List<HomeFiveProjectBean.ItemsBean> homeProjectInfo );
     void onGetHomeBuyFailed(String msg);
+    //测试下载图片
+    void onDownLoadImageSucess(Bitmap bitmap);
+    void onDownLoadImageFailed(String msg);
 }

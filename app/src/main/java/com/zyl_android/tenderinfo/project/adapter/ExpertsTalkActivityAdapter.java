@@ -37,6 +37,8 @@ public class ExpertsTalkActivityAdapter extends RecyclerView.Adapter<RecyclerVie
     private String askContent;
     private String askTitle;
     private OnPostDataClickListioner onPostDataClickListioner;
+    private String expertsCode;
+
     public ExpertsTalkActivityAdapter(List<ExpertsDataBean.ItemsBean> expertDataList, Context context) {
         this.expertDataList = expertDataList;
         this.context = context;
@@ -79,16 +81,21 @@ public class ExpertsTalkActivityAdapter extends RecyclerView.Adapter<RecyclerVie
             ((ExpertsViewHolderTwo) holder).expertsTitle.setText(expertDataList.get(position - 1).getTitle());
             Bitmap bitmap = B64PhotoUtils.stringToBitmap(expertDataList.get(position - 1).getHeadPortrait());
             ((ExpertsViewHolderTwo) holder).expertsPhoto.setImageBitmap(B64PhotoUtils.makeRoundCorner(bitmap));
-            final int newPostion=position;
+            if (oldPostion!=position) {
+                ((ExpertsViewHolderTwo) holder).expertsLayout.setSelected(false);
+            		}else {
+                ((ExpertsViewHolderTwo) holder).expertsLayout.setSelected(true);
+                expertsCode=expertDataList.get(position-1).getCode();
+            }
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (oldPostion!=newPostion) {
-                        oldPostion=newPostion;
-                        ((ExpertsViewHolderTwo) holder).expertsLayout.setSelected(false);
+                    if (oldPostion!=position) {
+                        oldPostion=position;
                     }else {
-                        ((ExpertsViewHolderTwo) holder).expertsLayout.setSelected(true);
+                        oldPostion=-1;//还原初始值
                     }
+                    notifyDataSetChanged();
                 }
             });
         }
@@ -140,12 +147,12 @@ public class ExpertsTalkActivityAdapter extends RecyclerView.Adapter<RecyclerVie
             postData.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onPostDataClickListioner.onPostDataClickListioner(askContent,askTitle);
+                    onPostDataClickListioner.onPostDataClickListioner(askContent,askTitle,expertsCode);
                 }
             });
         }
     }
    public interface OnPostDataClickListioner{
-        void onPostDataClickListioner(String askContent,String questionContent);
+        void onPostDataClickListioner(String askContent,String questionContent,String expertsCode);
     }
 }

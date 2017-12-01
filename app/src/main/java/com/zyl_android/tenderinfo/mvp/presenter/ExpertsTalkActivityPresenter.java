@@ -3,6 +3,7 @@ package com.zyl_android.tenderinfo.mvp.presenter;
 import com.zyl_android.tenderinfo.mvp.base.basepresenter.BasePresenter;
 import com.zyl_android.tenderinfo.mvp.model.ExpertsTalkActivityModel;
 import com.zyl_android.tenderinfo.mvp.view.ExpertsTalkActivityView;
+import com.zyl_android.tenderinfo.project.bean.AskExpertsBean;
 import com.zyl_android.tenderinfo.project.bean.ExpertsDataBean;
 
 import rx.Subscription;
@@ -33,6 +34,21 @@ public class ExpertsTalkActivityPresenter extends BasePresenter {
                     @Override
                     public void call(Throwable throwable) {
                     expertsTalkActivityView.onGetExpertsDataFailed(throwable.getMessage());
+                    }
+                });
+        addSubScription(subscription);
+    }
+    public void postExpertsInfo(String userId, String enterpriseId,String type,String expertCodeStr,String title,String content){
+        Subscription subscription=expertsTalkActivityModel.postExpertsData(userId,enterpriseId,type,expertCodeStr,title,content).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).
+                subscribe(new Action1<AskExpertsBean>() {
+                    @Override
+                    public void call(AskExpertsBean askExpertsBean) {
+                    expertsTalkActivityView.onPostExpertsDataSucess(askExpertsBean);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                     expertsTalkActivityView.onPostExpertsDataFailed(throwable.getMessage());
                     }
                 });
         addSubScription(subscription);
