@@ -1,27 +1,21 @@
 package com.zyl_android.tenderinfo.project.ui.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.mvp.presenter.SearchResultActivityPresenter;
 import com.zyl_android.tenderinfo.mvp.view.SearchResultActivityView;
-import com.zyl_android.tenderinfo.project.adapter.ExpertsTalkActivityAdapterx;
 import com.zyl_android.tenderinfo.project.adapter.SearchResultActivityAdapter;
 import com.zyl_android.tenderinfo.project.bean.SearchResultBean;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -35,7 +29,7 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
     ImageView noDataView;
     private String content;
     private int pageNumb=1;
-    private ExpertsTalkActivityAdapterx adapter;
+    private SearchResultActivityAdapter adapter;
     private SearchResultActivityPresenter searchResultActivityPresenter;
     private List<SearchResultBean.ItemsBean> datas=new ArrayList<>();
     private boolean isloadmore;
@@ -88,35 +82,30 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
     public void onGetSearchResultSucess(List<SearchResultBean.ItemsBean> searchResultInfo) {
         waitView.stop();
         waitView.setVisibility(View.GONE);
+        if (adapter==null) {
+            adapter=new SearchResultActivityAdapter(this,datas);
+            searchResultRcylerView.setAdapter(adapter);
+        }
         if (isloadmore) {
             noDataViewisShow(searchResultInfo);
             if (searchResultInfo.size()==0) {//判断是否完成加载
                 getSmartRefreshLayout().finishLoadmore();
-                noDataView.setVisibility(View.VISIBLE);
-            }else {
-                noDataView.setVisibility(View.GONE);
             }
             getSmartRefreshLayout().finishLoadmore();//加载完成
-            datas.addAll(searchResultInfo);
+            adapter.addData(searchResultInfo);
         		}else {
             noDataViewisShow(searchResultInfo);//判断是否显示view
             getSmartRefreshLayout().finishRefresh();//刷新完成
-            datas.clear();
-            datas.addAll(searchResultInfo);
-        }
-        if (adapter==null) {
-            adapter=new ExpertsTalkActivityAdapterx(this,datas);
-            searchResultRcylerView.setAdapter(adapter);
-        }else {
-            adapter.notifyDataSetChanged();
+           adapter.refreshData(searchResultInfo);
         }
     }
 
     private void noDataViewisShow(List<SearchResultBean.ItemsBean> searchResultInfo) {
         if (searchResultInfo.size()>0) {
             noDataView.setVisibility(View.GONE);
-        		}
-        noDataView.setVisibility(View.VISIBLE);
+        		}else {
+            noDataView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

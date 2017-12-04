@@ -1,14 +1,17 @@
 package com.zyl_android.tenderinfo.project.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zyl_android.tenderinfo.R;
-import com.zyl_android.tenderinfo.mvp.base.baseview.BaseView;
+import com.zyl_android.tenderinfo.project.utils.CacheUtils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +20,13 @@ import java.util.List;
  * Created by bibinet on 2017-12-2.
  */
 
-public   abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<BaseRecyAdapter.BaseViewHolder> {
+public abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<BaseRecyAdapter.BaseViewHolder> {
     private List<T> datas=new ArrayList<>();
     private Context context;
 
     public BaseRecyAdapter(Context context,List<T> data) {
         this.context = context;
-        this.datas=datas;
+        this.datas=data;
     }
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,12 +35,13 @@ public   abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<BaseRecy
         return baseViewHolder;
     }
 
-    protected abstract int getChildLayout();
-
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
+    public void onBindViewHolder(BaseRecyAdapter.BaseViewHolder holder, int position) {
         onBindData(holder,datas,position);
     }
+
+    protected abstract int getChildLayout();
+
 
     //子view用于绑定数据
     protected abstract void onBindData(BaseViewHolder holder, List<T> datas, int position);
@@ -55,7 +59,7 @@ public   abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<BaseRecy
         notifyDataSetChanged();
     }
     //刷新数据
-    public void clearData(List<T> datas){
+    public void refreshData(List<T> datas){
         this.datas.clear();
         this.datas.addAll(datas);
         notifyDataSetChanged();
@@ -76,8 +80,15 @@ public   abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<BaseRecy
             		}
             		return (T)childView;
         }
-        //根据控件id为itemview中的控件添加点击事件
-        public void setOnclickListioner(){
+        public void setText(int id, String text) {
+            TextView tx = (TextView) itemView.findViewById(id);
+            tx.setText(text);
+    }
+        public void setImageView(int id,String url){
+//            Glide.with(context).load(url).error(R.mipmap.ic_launcher).into(imageView);
+            AppCompatImageView imageView = (AppCompatImageView) itemView.findViewById(id);
+            ImageLoader imageLoader=new ImageLoader(context,imageView);
+            imageLoader.loadBitmaps(imageView,url);
         }
     }
 }
