@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.mvp.presenter.SearchResultActivityPresenter;
 import com.zyl_android.tenderinfo.mvp.view.SearchResultActivityView;
+import com.zyl_android.tenderinfo.project.adapter.ExpertsTalkActivityAdapterx;
 import com.zyl_android.tenderinfo.project.adapter.SearchResultActivityAdapter;
 import com.zyl_android.tenderinfo.project.bean.SearchResultBean;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseActivity;
@@ -34,7 +35,7 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
     ImageView noDataView;
     private String content;
     private int pageNumb=1;
-    private SearchResultActivityAdapter adapter;
+    private ExpertsTalkActivityAdapterx adapter;
     private SearchResultActivityPresenter searchResultActivityPresenter;
     private List<SearchResultBean.ItemsBean> datas=new ArrayList<>();
     private boolean isloadmore;
@@ -104,7 +105,7 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
             datas.addAll(searchResultInfo);
         }
         if (adapter==null) {
-            adapter=new SearchResultActivityAdapter(datas,this);
+            adapter=new ExpertsTalkActivityAdapterx(this,datas);
             searchResultRcylerView.setAdapter(adapter);
         }else {
             adapter.notifyDataSetChanged();
