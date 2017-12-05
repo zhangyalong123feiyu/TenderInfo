@@ -28,21 +28,9 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
     @BindView(R.id.noDataView)
     ImageView noDataView;
     private String content;
-    private int pageNumb=1;
     private SearchResultActivityAdapter adapter;
     private SearchResultActivityPresenter searchResultActivityPresenter;
     private List<SearchResultBean.ItemsBean> datas=new ArrayList<>();
-    private boolean isloadmore;
-    @Override//下拉刷新
-    protected void onrefresh() {
-        pageNumb=1;
-        loadData(false);
-    }
-
-    @Override//上拉加载数据
-    protected void onloadMore() {
-        loadData(true);//加载数据
-    }
 
     @Override
     protected int getChildlayout() {
@@ -64,12 +52,7 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
 
     @Override//数据加载
     protected void loadData(boolean isLoadMore) {
-        isloadmore=isLoadMore;
-        if (isLoadMore) {
-            pageNumb++;
-        }else {
-            pageNumb=1;
-        }
+        super.loadData(isLoadMore);
         searchResultActivityPresenter.getSearchResult(String.valueOf(pageNumb),content);
     }
 
@@ -86,10 +69,10 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
             adapter=new SearchResultActivityAdapter(this,datas);
             searchResultRcylerView.setAdapter(adapter);
         }
-        if (isloadmore) {
+        if (isLoadMore) {
             noDataViewisShow(searchResultInfo);
             if (searchResultInfo.size()==0) {//判断是否完成加载
-                getSmartRefreshLayout().finishLoadmore();
+                getSmartRefreshLayout().setLoadmoreFinished(true);
             }
             getSmartRefreshLayout().finishLoadmore();//加载完成
             adapter.addData(searchResultInfo);

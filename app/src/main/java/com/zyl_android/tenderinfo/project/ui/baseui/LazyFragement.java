@@ -46,7 +46,5 @@ public abstract class LazyFragement extends Fragment {
         initData();
         isFirstLoad = false;
     }
-
     protected abstract void initData();
-    ;
 }

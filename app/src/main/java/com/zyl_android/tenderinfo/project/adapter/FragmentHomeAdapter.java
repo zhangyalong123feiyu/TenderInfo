@@ -77,7 +77,6 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((FragHomeViewHolderTwo) holder).projectDescrp.setText(homeProjectInfoList.get(position-1).getProjectDescrp());
             ((FragHomeViewHolderTwo) holder).projectLoaction.setText(homeProjectInfoList.get(position-1).getProjectLocation());
             ((FragHomeViewHolderTwo) holder).projectTime.setText(homeProjectInfoList.get(position-1).getProjectTime());
-            Log.i("TAG","type============================="+homeProjectInfoList.get(position-1).getProjectType());
             if (homeProjectInfoList.get(position-1).getProjectType().equals("A")) {
                 ((FragHomeViewHolderTwo) holder).projectImage.setImageResource(R.mipmap.shouye_gongcheng);
             } else if (homeProjectInfoList.get(position-1).getProjectType().equals("B")) {
@@ -141,7 +140,7 @@ public class FragmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((Context)context).startActivity(new Intent(context, ProjectDetailaActivity.class));
+                    context.startActivity(new Intent(context, ProjectDetailaActivity.class));
                 }
             });
         }

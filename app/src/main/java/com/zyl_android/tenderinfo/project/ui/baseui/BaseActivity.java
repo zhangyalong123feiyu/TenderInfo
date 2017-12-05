@@ -41,7 +41,8 @@ public abstract class BaseActivity extends MPermissionsActivity {
     public TextView title;
     public ImageView titleImageRight;
     public ImageView titleBackImage;
-
+    protected int pageNumb=1;//页码，供子类使用
+    protected boolean isLoadMore;//判断是否上拉加载，供子类使用
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +68,7 @@ public abstract class BaseActivity extends MPermissionsActivity {
         mainView.addView(childLayoutView);
         initStateBarTransparent();
     }
-
-
+    //初始化父类加载方法
     private void initBaseLoadData() {
         //删除当前页
         titleBackImage.setOnClickListener(new View.OnClickListener() {
@@ -89,14 +89,17 @@ public abstract class BaseActivity extends MPermissionsActivity {
             }
         });
     }
-
-    protected  void onrefresh(){};
-
-    protected  void onloadMore(){};
-
+    //下拉刷新
+    protected  void onrefresh(){
+        loadData(false);
+    };
+    //上拉加载
+    protected  void onloadMore(){
+        loadData(true);
+    };
+    //获取刷新控件
     protected SmartRefreshLayout getSmartRefreshLayout() {
         return smartRefreshLayout;
-
     }
 
     @Override
@@ -118,19 +121,25 @@ public abstract class BaseActivity extends MPermissionsActivity {
     public void log(String descrp, String str) {
         Log.i("TAG", descrp + "=======================" + str);
     }
-
+    //初始化透明状态栏
     public void initStateBarTransparent() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
-
+    //得到子类布局
     protected abstract int getChildlayout();
-
+    //初始化子view
     protected abstract void initView();
-
-    protected  void loadData(boolean isLoadMore){};
-
+    //加载数据
+    protected  void loadData(boolean isLoadMore){
+        this.isLoadMore=isLoadMore;
+        if (isLoadMore) {
+            pageNumb++;
+        }else {
+            pageNumb=1;
+        }
+    };
     /*---------------------------------------------------------------------------以下是android6.0动态授权的封装十分好用---------------------------------------------------------------------------*/
     private int  mPermissionIdx = 0x10;//请求权限索引
     private SparseArray<GrantedResult> mPermissions   = new SparseArray<>();//请求权限运行列表

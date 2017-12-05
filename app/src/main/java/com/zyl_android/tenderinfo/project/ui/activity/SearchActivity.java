@@ -60,16 +60,6 @@ public class SearchActivity extends BaseActivity implements SearchActivityView{
     private SearchActivityPresenter searchActivityPresenter;
 
     @Override
-    protected void onrefresh() {
-
-    }
-
-    @Override
-    protected void onloadMore() {
-
-    }
-
-    @Override
     protected int getChildlayout() {
         return R.layout.activity_search;
     }

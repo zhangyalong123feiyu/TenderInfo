@@ -1,4 +1,4 @@
-package com.zyl_android.tenderinfo.project.adapter;
+package com.zyl_android.tenderinfo.project.adapter.baseadapter;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.project.utils.CacheUtils.ImageLoader;
 
 import java.util.ArrayList;
@@ -65,7 +63,7 @@ public abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<BaseRecyAd
         notifyDataSetChanged();
     }
 
-    class BaseViewHolder extends RecyclerView.ViewHolder{
+    public  class BaseViewHolder extends RecyclerView.ViewHolder{
         private SparseArray<View> views;//存放item的控件
         public BaseViewHolder(View itemView) {
             super(itemView);
@@ -75,20 +73,24 @@ public abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<BaseRecyAd
         public <T extends View>T getView(int viewId){
             View childView = views.get(viewId);
             if (childView==null) {
-            			childView=itemView.findViewById(viewId);
+                childView=itemView.findViewById(viewId);
                 views.put(viewId,childView);
-            		}
-            		return (T)childView;
+            }
+            return (T)childView;
         }
-        public void setText(int id, String text) {
-            TextView tx = (TextView) itemView.findViewById(id);
+        public BaseViewHolder setText(int id, String text) {
+            TextView tx = itemView.findViewById(id);
             tx.setText(text);
-    }
+            return this;//buider设计模式，可以链式调用
+        }
         public void setImageView(int id,String url){
-//            Glide.with(context).load(url).error(R.mipmap.ic_launcher).into(imageView);
-            AppCompatImageView imageView = (AppCompatImageView) itemView.findViewById(id);
+            AppCompatImageView imageView = itemView.findViewById(id);
             ImageLoader imageLoader=new ImageLoader(context,imageView);
             imageLoader.loadBitmaps(imageView,url);
+        }
+        public void setImageView(int id,int resouce){
+            AppCompatImageView imageView = itemView.findViewById(id);
+            imageView.setImageResource(resouce);
         }
     }
 }

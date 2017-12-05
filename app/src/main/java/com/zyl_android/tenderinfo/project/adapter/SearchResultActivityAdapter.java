@@ -3,6 +3,7 @@ package com.zyl_android.tenderinfo.project.adapter;
 import android.content.Context;
 
 import com.zyl_android.tenderinfo.R;
+import com.zyl_android.tenderinfo.project.adapter.baseadapter.BaseRecyAdapter;
 import com.zyl_android.tenderinfo.project.bean.SearchResultBean;
 
 import java.util.List;
@@ -23,10 +24,10 @@ public class SearchResultActivityAdapter extends BaseRecyAdapter<SearchResultBea
     }
     @Override
     protected void onBindData(BaseViewHolder holder, List<SearchResultBean.ItemsBean> datas, int position) {
-        holder.setText(R.id.projcetName,datas.get(position).getProjectName());
-        holder.setText(R.id.procjetdescrp,datas.get(position).getProjectDescrp());
-        holder.setText(R.id.projcetlocation,datas.get(position).getProjectLocation());
-        holder.setText(R.id.projectpulishtime,datas.get(position).getProjectPublishTime());
+        holder.setText(R.id.projcetName,datas.get(position).getProjectName()).
+                setText(R.id.procjetdescrp,datas.get(position).getProjectDescrp()).
+                setText(R.id.projcetlocation,datas.get(position).getProjectLocation()).
+                setText(R.id.projectpulishtime,datas.get(position).getProjectPublishTime());
         if (datas.get(position).getProjectType().equals("A")) {
             holder.setText(R.id.projectype,"工程");
         }else if (datas.get(position).getProjectType().equals("B")) {

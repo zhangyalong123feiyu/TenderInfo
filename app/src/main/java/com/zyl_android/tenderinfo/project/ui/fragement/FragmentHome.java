@@ -27,6 +27,7 @@ import com.zyl_android.tenderinfo.project.bean.BannerBean;
 import com.zyl_android.tenderinfo.project.bean.HomeFiveProjectBean;
 import com.zyl_android.tenderinfo.project.builder.CustomerRecyclerview;
 import com.zyl_android.tenderinfo.project.builder.ObservableScrollView;
+import com.zyl_android.tenderinfo.project.ui.activity.MoreProjectActivity;
 import com.zyl_android.tenderinfo.project.ui.activity.PlatformActivity;
 import com.zyl_android.tenderinfo.project.ui.activity.SearchActivity;
 import com.zyl_android.tenderinfo.project.ui.baseui.BaseFragement;
@@ -122,7 +123,6 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
     private CustomerRecyclerview buyRecyclerview;
     private int projcetType;
     private boolean isRefresh;
-
     @Override
     protected void refreshData() {
         isRefresh=true;
@@ -226,6 +226,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
                 getActivity().startActivity(intentPlatf);
                 break;
             case R.id.projcetInfo_layout:
+                startMoreProjectActivity("projectInfo");
                 break;
             case R.id.niProject_text:
                 break;
@@ -236,6 +237,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
             case R.id.projcetInfo_text:
                 break;
             case R.id.tenderProjcetInfo_layout:
+                startMoreProjectActivity("tenderInfo");
                 break;
             case R.id.tenderPublic_text:
                 break;
@@ -248,6 +250,7 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
             case R.id.tenderSubject_text:
                 break;
             case R.id.buyProjectInfo_layout:
+                startMoreProjectActivity("buyInfo");
                 break;
             case R.id.governmentBuy_text:
                 break;
@@ -263,6 +266,12 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
                 break;
         }
 
+    }
+//开启更多项目信息页面
+    private void startMoreProjectActivity(String decrp) {
+        Intent intent=new Intent(getActivity(), MoreProjectActivity.class);
+        intent.putExtra("WhichProject",decrp);
+        startActivity(intent);
     }
 
     private void startLocation() {

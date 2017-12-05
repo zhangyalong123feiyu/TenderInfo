@@ -101,8 +101,6 @@ public abstract class BaseFragement extends LazyFragement {
 
     protected abstract void initView();
 
-    protected abstract void initData();
-
     public void toast(String str) {
         Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
     }

@@ -15,6 +15,12 @@ public  class ProjectDetailaActivity extends BaseWebViewActivity {
     }
 
     @Override
+    protected void initView() {
+        super.initView();
+        title.setText("详情页");
+    }
+
+    @Override
     protected void initWebView() {
         getWebView().loadUrl("http://www.baidu.com");
     }
