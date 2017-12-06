@@ -14,6 +14,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.header.FalsifyHeader;
 import com.zyl_android.tenderinfo.R;
 
 import org.litepal.LitePalApplication;
@@ -45,7 +46,7 @@ public class TenderApplication extends LitePalApplication {
             @Override
             public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
                 //指定为经典Footer，默认是 BallPulseFooter
-                layout.setFooterHeight(25);
+                layout.setFooterHeight(45);
                 layout.setPrimaryColors(R.color.gray);
                 return new ClassicsFooter(context).setSpinnerStyle(SpinnerStyle.Translate);
             }

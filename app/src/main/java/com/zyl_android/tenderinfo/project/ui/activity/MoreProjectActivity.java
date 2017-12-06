@@ -59,6 +59,7 @@ public class MoreProjectActivity extends BaseActivity implements MoreProjectActi
     private List<String> data=new ArrayList<>();
     private MorePorjectPopAdapter adapter;
     private MoreProjectAdapter moreProjectAdapter;
+    private MoreProjectActivityPresenter moreProjectActivityPresenter;
 
     @Override
     protected int getChildlayout() {
@@ -72,6 +73,7 @@ public class MoreProjectActivity extends BaseActivity implements MoreProjectActi
         getSmartRefreshLayout().setEnableLoadmore(true);
         dialogUtils= new PopWindowUtils(this);
         moreProjectRcyclerView.setLayoutManager(new LinearLayoutManager(this));
+        moreProjectActivityPresenter=new MoreProjectActivityPresenter(this);
     }
 
     @OnClick({R.id.projectIndustry, R.id.projectAeara, R.id.projectTime})
@@ -115,13 +117,14 @@ public class MoreProjectActivity extends BaseActivity implements MoreProjectActi
     @Override
     protected void loadData(boolean isLoadMore) {
         super.loadData(isLoadMore);
+        log("page","pae======"+pageNumb);
+        log("加载数据","加载数据======");
         String wichProject = getIntent().getStringExtra("WhichProject");
-        MoreProjectActivityPresenter moreProjectActivityPresenter=new MoreProjectActivityPresenter(this);
         if (wichProject.equals("projectInfo")) {
             moreProjectActivityPresenter.getMoreProjectInfo(String.valueOf(pageNumb),String.valueOf(5),String.valueOf(0),"z",String.valueOf(140000));
         }else if (wichProject.equals("tenderInfo")) {
             moreProjectActivityPresenter.getMoreTenderInfo(String.valueOf(pageNumb),String.valueOf(5),String.valueOf(0),"z",String.valueOf(140000));
-        }else{
+        }else if (wichProject.equals("buyInfo")) {
             moreProjectActivityPresenter.getMoreBuyInfo(String.valueOf(pageNumb),String.valueOf(5),String.valueOf(0),"z",String.valueOf(140000));
         }
     }
@@ -141,6 +144,7 @@ public class MoreProjectActivity extends BaseActivity implements MoreProjectActi
             moreProjectAdapter.refreshData(moreInfoList);
             getSmartRefreshLayout().finishRefresh();
         }
+        log("数据多少","加载数据======"+moreInfoList.size());
     }
 
     @Override

@@ -65,6 +65,7 @@ public abstract class BaseActivity extends MPermissionsActivity {
         smartRefreshLayout = (SmartRefreshLayout) findViewById(R.id.refreshLayout);
         smartRefreshLayout.setEnableRefresh(false);//设置默认关闭下拉刷新功能
         smartRefreshLayout.setEnableLoadmore(false);//默认关闭刷新，需要刷新时子类去实现
+        smartRefreshLayout.setEnableLoadmoreWhenContentNotFull(true);//设置当内容不满一个页面时，是否可以加载更多
         mainView.addView(childLayoutView);
         initStateBarTransparent();
     }
