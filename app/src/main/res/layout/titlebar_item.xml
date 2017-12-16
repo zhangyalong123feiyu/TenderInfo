@@ -27,7 +27,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/tiwen"
             android:visibility="gone"/>
         <ImageView
             android:id="@+id/title_imageleft"

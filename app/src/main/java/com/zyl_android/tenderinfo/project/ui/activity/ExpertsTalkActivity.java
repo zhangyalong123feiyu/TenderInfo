@@ -1,5 +1,6 @@
 package com.zyl_android.tenderinfo.project.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,6 +45,13 @@ public class ExpertsTalkActivity extends BaseActivity implements ExpertsTalkActi
     protected void initView() {
         title.setText("专家约谈");
         titleBackImage.setVisibility(View.VISIBLE);
+        titleImageRight.setVisibility(View.VISIBLE);
+        titleImageRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExpertsTalkActivity.this,ExpertsTalkHistoryActivity.class));
+            }
+        });
         if (NetworkUtils.isNetworkAvailable(this)) {
             waitView.setVisibility(View.VISIBLE);
             waitView.start();

@@ -1,5 +1,7 @@
 package com.zyl_android.tenderinfo.mvp.presenter;
 
+import android.util.Log;
+
 import com.zyl_android.tenderinfo.mvp.model.MoreProjectActivityModel;
 import com.zyl_android.tenderinfo.mvp.view.MoreProjectActivityView;
 import com.zyl_android.tenderinfo.project.bean.ProjectInfoBean;
@@ -25,6 +27,7 @@ public class MoreProjectActivityPresenter {
                 .subscribe(new Action1<ProjectInfoBean>() {
                     @Override
                     public void call(ProjectInfoBean projectInfoBean) {
+                        Log.i("TAG",projectInfoBean.getItems().size()+"===========duosao===============");
                         moreProjectActivityView.loadMoreSucess(projectInfoBean.getItems());
                     }
                 }, new Action1<Throwable>() {

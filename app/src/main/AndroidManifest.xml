@@ -35,6 +35,9 @@
         <activity android:name=".project.ui.activity.RegistActivity" android:screenOrientation="portrait"/>
         <activity android:name=".project.ui.activity.ExpertsTalkActivity" android:screenOrientation="portrait"/>
         <activity android:name=".project.ui.activity.MoreProjectActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".project.ui.activity.ExpertsTalkHistoryActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".project.ui.activity.TenderHelpActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".project.ui.activity.TenderHelpHistoryActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

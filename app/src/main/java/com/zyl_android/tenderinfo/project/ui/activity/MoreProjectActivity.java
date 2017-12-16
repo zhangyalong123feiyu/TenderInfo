@@ -69,6 +69,8 @@ public class MoreProjectActivity extends BaseActivity implements MoreProjectActi
     @Override
     protected void initView() {
         title.setText("更多信息");
+        waitView.setVisibility(View.VISIBLE);
+        waitView.start();
         getSmartRefreshLayout().setEnableRefresh(true);
         getSmartRefreshLayout().setEnableLoadmore(true);
         dialogUtils= new PopWindowUtils(this);
@@ -108,7 +110,7 @@ public class MoreProjectActivity extends BaseActivity implements MoreProjectActi
         dialogUtils.createPopWindow(R.layout.item_moreprojcet_popwindow);
         View popView = dialogUtils.getPopview();
         RecyclerView popRecyclerView = (RecyclerView) popView.findViewById(R.id.popRecyclerView);
-        adapter=new MorePorjectPopAdapter(this,data);
+        adapter=new MorePorjectPopAdapter(this);
         popRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         popRecyclerView.setAdapter(adapter);
         dialogUtils.showPopWindow(projectAeara);
@@ -117,8 +119,6 @@ public class MoreProjectActivity extends BaseActivity implements MoreProjectActi
     @Override
     protected void loadData(boolean isLoadMore) {
         super.loadData(isLoadMore);
-        log("page","pae======"+pageNumb);
-        log("加载数据","加载数据======");
         String wichProject = getIntent().getStringExtra("WhichProject");
         if (wichProject.equals("projectInfo")) {
             moreProjectActivityPresenter.getMoreProjectInfo(String.valueOf(pageNumb),String.valueOf(5),String.valueOf(0),"z",String.valueOf(140000));
@@ -130,8 +130,10 @@ public class MoreProjectActivity extends BaseActivity implements MoreProjectActi
     }
     @Override
     public void loadMoreSucess(List<ProjectInfoBean.ItemsBean> moreInfoList) {
+        waitView.stop();
+        waitView.setVisibility(View.GONE);
         if (moreProjectAdapter==null) {//如果adapter为空，先创建
-            moreProjectAdapter=new MoreProjectAdapter(this,moreInfoList);
+            moreProjectAdapter=new MoreProjectAdapter(this);
             moreProjectRcyclerView.setAdapter(moreProjectAdapter);
         }
         if (isLoadMore) {
@@ -144,12 +146,14 @@ public class MoreProjectActivity extends BaseActivity implements MoreProjectActi
             moreProjectAdapter.refreshData(moreInfoList);
             getSmartRefreshLayout().finishRefresh();
         }
-        log("数据多少","加载数据======"+moreInfoList.size());
+
     }
 
     @Override
     public void loadMoreFailed(String msg) {
         log("跟多数据错误",msg);
         getSmartRefreshLayout().finishLoadmore();
+        waitView.stop();
+        waitView.setVisibility(View.GONE);
     }
 }

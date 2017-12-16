@@ -56,4 +56,7 @@ dependencies {
     compile 'com.yanzhenjie.nohttp:okhttp:1.1.4'
     //数据库使用库
     compile 'org.litepal.android:core:1.6.0'
+    compile "com.android.support:cardview-v7:26.+"
+    //nohttp
+    compile 'com.yanzhenjie.nohttp:okhttp:1.1.4'
 }

@@ -175,32 +175,17 @@ public class FragmentHome extends BaseFragement implements FragmentHomeView {
         //项目信息相关信息配置
         projectRecyclerview = new CustomerRecyclerview(getActivity());
         projectRecyclerview.setBackground(drawable);
-        projectRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        });
+        projectRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         //招标信息相关配置
         tenderRecyclerview = new CustomerRecyclerview(getActivity());
         tenderRecyclerview.setBackground(drawable);
         tenderRecyclerview.setLayoutParams(params);
-        tenderRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        });
+        tenderRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         //采购信息相关配置
         buyRecyclerview=new CustomerRecyclerview(getActivity());
         buyRecyclerview.setBackground(drawable);
         buyRecyclerview.setLayoutParams(params);
-        buyRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        });
+        buyRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         buyRecyclerview.setLayoutParams(params);
 
     }

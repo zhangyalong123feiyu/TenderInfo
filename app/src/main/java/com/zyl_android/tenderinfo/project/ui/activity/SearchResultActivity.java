@@ -66,7 +66,7 @@ public class SearchResultActivity extends BaseActivity implements SearchResultAc
         waitView.stop();
         waitView.setVisibility(View.GONE);
         if (adapter==null) {
-            adapter=new SearchResultActivityAdapter(this,datas);
+            adapter=new SearchResultActivityAdapter(this);
             searchResultRcylerView.setAdapter(adapter);
         }
         if (isLoadMore) {

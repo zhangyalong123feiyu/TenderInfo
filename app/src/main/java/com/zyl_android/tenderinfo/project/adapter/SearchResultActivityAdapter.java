@@ -14,8 +14,8 @@ import java.util.List;
  */
 
 public class SearchResultActivityAdapter extends BaseRecyAdapter<SearchResultBean.ItemsBean> {
-    public SearchResultActivityAdapter(Context context, List<SearchResultBean.ItemsBean> data) {
-        super(context, data);
+    public SearchResultActivityAdapter(Context context) {
+        super(context);
     }
 
     @Override

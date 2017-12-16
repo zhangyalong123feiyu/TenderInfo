@@ -13,8 +13,8 @@ import java.util.List;
  */
 
 public class MoreProjectAdapter extends BaseRecyAdapter<ProjectInfoBean.ItemsBean> {
-    public MoreProjectAdapter(Context context, List<ProjectInfoBean.ItemsBean> data) {
-        super(context, data);
+    public MoreProjectAdapter(Context context) {
+        super(context);
     }
 
     @Override

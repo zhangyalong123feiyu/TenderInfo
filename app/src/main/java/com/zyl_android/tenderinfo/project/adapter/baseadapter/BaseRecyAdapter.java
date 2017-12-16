@@ -20,11 +20,11 @@ import java.util.List;
 
 public abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<BaseRecyAdapter.BaseViewHolder> {
     private List<T> datas=new ArrayList<>();
-    private Context context;
+    protected Context context;
 
-    public BaseRecyAdapter(Context context,List<T> data) {
+    public BaseRecyAdapter(Context context/*,List<T> data*/) {
         this.context = context;
-        this.datas=data;
+      //  this.datas=data; 传值和传地址问题，如果写上会导致修改数据源
     }
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

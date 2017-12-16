@@ -15,8 +15,8 @@ import java.util.List;
 
 public class MorePorjectPopAdapter extends BaseRecyAdapter<String> {
     private ItemClickListioner itemClickListioner;
-    public MorePorjectPopAdapter(Context context, List<String> data) {
-        super(context, data);
+    public MorePorjectPopAdapter(Context context) {
+        super(context);
     }
     public void setItemClickListioner(ItemClickListioner itemClickListioner){
         this.itemClickListioner=itemClickListioner;
