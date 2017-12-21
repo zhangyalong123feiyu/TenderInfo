@@ -71,11 +71,4 @@ public abstract class BaseWebViewActivity extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

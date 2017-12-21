@@ -83,9 +83,6 @@ public class FragmentAsk extends BaseFragement {
         DownloadUtil downloadUtil=DownloadUtil.get();
         final DialogUtils dialogUtils=new DialogUtils();
         dialogUtils.diloagShow(getActivity(),R.layout.progress_dialog);
-        View view=dialogUtils.getView();
-        final ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.progressProBar);
-        final TextView textView=(TextView)view.findViewById(R.id.progressText);
         downloadUtil.download(getActivity(),"http://ucenter.utb2013.com/uploads/apk/cn.com.zhwts.apk", Environment.getDataDirectory() + "apk", new DownloadUtil.OnDownloadListener() {
             @Override
             public void onDownloadSuccess() {
@@ -96,8 +93,9 @@ public class FragmentAsk extends BaseFragement {
             @Override
             public void onDownloading(int progress) {
                 Log.i("下载进度",progress+"");
+                dialogUtils.setDialogText(R.id.progressText,String.valueOf(progress));
+                ProgressBar progressBar=dialogUtils.getDialogView(R.id.progressProBar);
                 progressBar.setProgress(progress);
-                textView.setText(progress+"");
 
             }
 

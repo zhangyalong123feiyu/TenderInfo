@@ -1,10 +1,12 @@
 package com.zyl_android.tenderinfo.project.ui.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.zyl_android.generalutils.PhoneNumberUtils;
 import com.zyl_android.tenderinfo.R;
 import com.zyl_android.tenderinfo.mvp.presenter.TenderHelpActivityPresenter;
 import com.zyl_android.tenderinfo.mvp.view.TenderHelpActivityView;
@@ -60,13 +62,19 @@ public class TenderHelpActivity extends BaseActivity implements TenderHelpActivi
         String phoneNumb=contactType.getText().toString().trim();
         String person=contactPersonInput.getText().toString().trim();
         TenderHelpActivityPresenter tenderHelpActivityPresenter=new TenderHelpActivityPresenter(this);
-        tenderHelpActivityPresenter.postTenderHelpData(person,phoneNumb,content, Constants.loginResultInfo.getUser().getUserId());
+        if (TextUtils.isEmpty(content)||TextUtils.isEmpty(person)) {
+            toast("请确保您要输入的内容不为空");
+        		}else if (PhoneNumberUtils.isMobileNumber(phoneNumb)) {
+        					toast("请输入正确的手机号");
+        				}else {
+            tenderHelpActivityPresenter.postTenderHelpData(this,person,phoneNumb,content, Constants.loginResultInfo.getUser().getUserId());
+        }
     }
 
     @Override
     public void onPostDataSucess(BaseBean postInfo) {
         if (postInfo.getResCode().equals("0000")) {
-            toast("提交成功");
+            toast("提交成功,");
             finish();
         		}else {
             toast(postInfo.getResMessage());

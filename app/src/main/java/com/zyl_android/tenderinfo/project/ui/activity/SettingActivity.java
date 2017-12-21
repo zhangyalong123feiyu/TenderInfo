@@ -61,6 +61,7 @@ public class SettingActivity extends BaseActivity {
                 startActivity(new Intent(this,ModifyPasswordActivity.class));
                 break;
             case R.id.advicePush:
+                startActivity(new Intent(this,AdviceSubmitActivity.class));
                 break;
             case R.id.clearCache:
                 doClearCache();

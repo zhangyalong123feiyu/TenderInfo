@@ -36,7 +36,6 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:clickable="true"
-            android:onClick="onClick"
             android:padding="9dp"
             android:src="@mipmap/denglu_fanhui"
             android:visibility="visible"/>

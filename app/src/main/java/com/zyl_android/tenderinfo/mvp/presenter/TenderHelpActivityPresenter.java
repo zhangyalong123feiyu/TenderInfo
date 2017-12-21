@@ -1,7 +1,9 @@
 package com.zyl_android.tenderinfo.mvp.presenter;
 
+import android.app.Activity;
+import android.util.Log;
+
 import com.google.gson.Gson;
-import com.zyl_android.tenderinfo.mvp.base.basemodel.BaseModel;
 import com.zyl_android.tenderinfo.mvp.model.TenderHelpActivityModel;
 import com.zyl_android.tenderinfo.mvp.view.TenderHelpActivityView;
 import com.zyl_android.tenderinfo.project.bean.BaseBean;
@@ -24,19 +26,29 @@ public class TenderHelpActivityPresenter {
         this.tenderHelpActivityView = tenderHelpActivityView;
         this.tenderHelpActivityModel=new TenderHelpActivityModel();
     }
-    public void postTenderHelpData(String contact, String cellPhone, String content, String customerId){
+    public void postTenderHelpData(final Activity activity, String contact, String cellPhone, String content, String customerId){
         tenderHelpActivityModel.postTenderHelpData(contact, cellPhone, content, customerId, new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                tenderHelpActivityView.onPostDataFailed(e.getMessage());
+            public void onFailure(Call call, final IOException e) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tenderHelpActivityView.onPostDataFailed(e.getMessage());
+                    }
+                });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Gson gson=new Gson();
                 String string=response.body().string();
-                BaseBean postInfo = gson.fromJson(string, BaseBean.class);
-                tenderHelpActivityView.onPostDataSucess(postInfo);
+                final BaseBean postInfo = gson.fromJson(string, BaseBean.class);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tenderHelpActivityView.onPostDataSucess(postInfo);
+                    }
+                });
             }
         });
     }

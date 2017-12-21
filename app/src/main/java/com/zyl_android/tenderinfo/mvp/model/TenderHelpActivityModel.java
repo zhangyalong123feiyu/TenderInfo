@@ -16,7 +16,7 @@ public class TenderHelpActivityModel {
     public void postTenderHelpData(String contact, String cellPhone, String content, String customerId, Callback callback){
         OkHttpClient okHttpClient=new OkHttpClient();
         RequestBody requestBody=new FormBody.Builder().add("contact",contact).add("cellPhone",cellPhone).add("content",content).add("customerId",customerId).build();
-        Request request=new Request.Builder().post(requestBody).url(Constants.baseUrl_iip+"").build();
+        Request request=new Request.Builder().post(requestBody).url(Constants.baseUrl_pis+"appAssistance/apply.json").build();
         okHttpClient.newCall(request).enqueue(callback);
     }
 }
